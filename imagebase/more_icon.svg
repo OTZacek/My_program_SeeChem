@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 63">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Menu">
+    <rect id="Rectangle_175" data-name="Rectangle 175" class="cls-1" width="63" height="63"/>
+    <path id="Union_4" data-name="Union 4" class="cls-2" d="M0,61v-8h32.5v8H0ZM0,37v-8h65v8H0ZM0,13V5h65v8H0Z"/>
+  </g>
+</svg>
