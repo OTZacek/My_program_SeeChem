@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from SeeChem_Functions import Load_svg
+from SeeChem_Functions import Load_svg, Load_png, Create_topbars
 
 # root
 root=Tk()
@@ -63,11 +63,18 @@ class welcome_page():
         self.w_logoframe = Frame(master)
         self.w_logoframe.pack(padx=30, pady=50, anchor="sw")
 
-        self.logobig = Load_svg("imagebase/SeeChemLogo101.svg", width = 200)
+        self.logobig = Load_png("imagebase/SeeChemLogo101.png", width = 200)
         self.logobiglabel = Label(self.w_logoframe, image=self.logobig)
         self.logobiglabel.pack()
 
 w = welcome_page(welcome_page_frame)
 
-pages["welcome"].tkraise()
+class home_page():
+    def __init__(self, master):
+
+        Create_topbars(master, "Home Page")
+
+h = home_page(home_page_frame)
+
+pages["home"].tkraise()
 root.mainloop()
