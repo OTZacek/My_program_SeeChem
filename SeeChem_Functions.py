@@ -54,7 +54,10 @@ def Create_background(master, image_path):
         return None, None
 
 # create pages
-def Create_topbars(parentpage, specific):
+def Create_topbars(
+        parentpage, location_specific#, function_more, 
+        #function_account
+        ):
     topbarframe = Frame(parentpage, bg="#090E9A", borderwidth=2)
     topbarframe.pack(fill=X)
 
@@ -62,13 +65,28 @@ def Create_topbars(parentpage, specific):
     logosmalllabel = Label(topbarframe, image=logosmall, bg="#090E9A")
     logosmalllabel.pack(side=LEFT)
 
-    page_location = Label(topbarframe, text="SeeChem - " + specific, font=("Poppins", 25, "bold"),bg="#090E9A" ,fg="#FFFFFF")
+    page_location = Label(topbarframe, text="SeeChem - " + location_specific, font=("Poppins", 25, "bold"),bg="#090E9A" ,fg="#FFFFFF")
     page_location.pack(side=LEFT)
 
     more_icon = Load_png("imagebase/more_icon.png", width=20)
-    more_btn = Button(topbarframe, image=more_icon)
+    more_btn = Button(topbarframe, image=more_icon)#, command=function_more)
     more_btn.pack(side=RIGHT)
 
     account_icon = Load_png("imagebase/account_icon.png", width=20)
-    account_btn = Button(topbarframe, image=account_icon)
+    account_btn = Button(topbarframe, image=account_icon)#, command=function_account)
     account_btn.pack(side=RIGHT)
+
+# functions of MORE button
+
+# create about us button
+def Create_aboutus(parentpage):
+    about_us_frame = Frame(parentpage)
+    about_us_frame.pack(padx=10, pady=50, side="bottom", anchor="w")
+
+    about_us_btn = Button(about_us_frame, text="About us", font=("TeluguSangamMN", 20))
+    about_us_btn.pack()
+
+    about_us_txt = Label(
+        about_us_frame, text="SeeChem Group All Rights Reserved", font=("AppleBraille", 10)
+        )
+    about_us_txt.pack()
