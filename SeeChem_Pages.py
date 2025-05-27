@@ -1,15 +1,15 @@
 from tkinter import *
 from tkinter import ttk
-from PIL import Image, ImageTk
-from SeeChem_Functions import Load_svg, Load_png
-from SeeChem_Functions import Create_topbars, Create_background, Create_aboutus
+from tkinter import messagebox
+from SeeChem_Image_Functions import Load_svg, Load_png
+from SeeChem_Create_Pages_Functions import Create_topbars, Create_background, Create_aboutus
 
 # root
 root=Tk()
 root.title("SeeChem App")
 root.geometry("1024x768")
 # root.attributes('-fullscreen', True) # to force into full screen
-root.wm_attributes("-transparent", 0)
+#root.wm_attributes("-transparent", 0)
 
 # seechem icon
 seechem_icon = PhotoImage(file="imagebase/SeeChem_icon.png")
@@ -26,24 +26,79 @@ main_container.grid_columnconfigure(0, weight=1)
 pages={}
 
 #1
+access_page_frame = Frame(main_container)
 welcome_page_frame = Frame(main_container)
 home_page_frame = Frame(main_container)
 periodic_table_chart_frame = Frame(main_container)
 simulator_frame = Frame(main_container)
 
 #2
+access_page_frame.grid(row=0, column=0, sticky="nesw")
 welcome_page_frame.grid(row=0, column=0, sticky="nsew")
 home_page_frame.grid(row=0, column=0, sticky="nesw")
 periodic_table_chart_frame.grid(row=0, column=0, sticky="nesw")
 simulator_frame.grid(row=0, column=0, sticky="nesw")
 
 #3
+pages["create_account"] = access_page_frame
 pages["welcome"] = welcome_page_frame
 pages["home"] = home_page_frame
 pages["periodict"] = periodic_table_chart_frame
 pages["simulator"] = simulator_frame
 
 # class
+class access_page():
+    def __init__(self, master):
+
+        login_frame = Frame(master)
+        login_frame.pack(pady=300)
+
+        self.username_label = Label(login_frame, text="Username:")
+        self.username_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+        self.username_entry = Entry(login_frame)
+        self.username_entry.grid(row=0, column=1, padx=10, pady=10)
+
+        self.password_label = Label(login_frame, text="Password:")
+        self.password_label.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+        self.password_entry = Entry(login_frame, show="*")
+        self.password_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        self.confirm_password_label = Label(login_frame, text="Confirm Password:")
+        self.confirm_password_label.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        self.confirm_password_entry = Entry(login_frame, show="*")
+        self.confirm_password_entry.grid(row=2, column=1, padx=10, pady=10)
+
+        self.create_button = Button(login_frame, text="Create Account")
+        self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
+
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+        confirm_password = self.confirm_password_entry.get()
+
+        if not username or not password:
+            messagebox.showerror("Error", "Username and password are required.")
+            return
+
+        if password != confirm_password:
+            messagebox.showerror("Error", "Passwords do not match.")
+            return
+
+        user_data = {
+            "username": username,
+            "password": password
+        }
+
+        messagebox.showinfo("Success", "Account created successfully!")
+        print(user_data)
+
+        self.username_entry.delete(0, END)
+        self.password_entry.delete(0, END)
+        self.confirm_password_entry.delete(0, END)
+
+a = access_page(access_page_frame)
+
+
+
 class welcome_page():
     def __init__(self, master):
 
@@ -56,15 +111,18 @@ class welcome_page():
         # button functions
         def Log_in():
             pages["home"].tkraise()
+
+        def Create_account():
+            pages["create_account"].tkraise()
         
         # text
         self.w_txtframe = Frame(master)
         self.w_txtframe.pack(padx=50, pady=80, anchor="w")
 
-        self.w_text1 = Label(self.w_txtframe, text="Welcome to SeeChem", font=("Poppins", 80, "bold"), bg="white")
+        self.w_text1 = Label(self.w_txtframe, text="Welcome to SeeChem", font=("Poppins", 80, "bold"))
         self.w_text1.grid(row=0, column=0, sticky="w")
 
-        self.w_text2 = Label(self.w_txtframe, text="where you start your chemistry", font=("Poppins", 50), bg="white")
+        self.w_text2 = Label(self.w_txtframe, text="where you start your chemistry", font=("Poppins", 50))
         self.w_text2.grid(row=1, column=0, sticky="w")
 
         # btn
@@ -76,7 +134,7 @@ class welcome_page():
         self.w_btn_log.grid(row=0, column=0, pady=5, sticky="w")
 
         self.w_btn_sign = Button(
-            self.w_btnframe, text="➔ Create Account", font=("OpenSans", 30), relief="flat", highlightthickness=0)
+            self.w_btnframe, text="➔ Create Account", command=Create_account, font=("OpenSans", 30), relief="flat", highlightthickness=0)
         self.w_btn_sign.grid(row=1, column=0, pady=5, sticky="w")
 
         self.w_btn_guest = Button(
@@ -95,6 +153,8 @@ class welcome_page():
         self.logotxt.pack()
 
 w = welcome_page(welcome_page_frame)
+
+
 
 class home_page():
     def __init__(self, master):
@@ -152,6 +212,8 @@ class home_page():
 
 h = home_page(home_page_frame)
 
+
+
 class periodic_table_chart():
     def __init__(self, master):
 
@@ -167,6 +229,8 @@ class periodic_table_chart():
 
 p = periodic_table_chart(periodic_table_chart_frame)
 
+
+
 class simulator():
     def __init__(self, master):
 
@@ -181,5 +245,5 @@ class simulator():
 
 s = simulator(simulator_frame)
 
-pages["home"].tkraise()
+pages["welcome"].tkraise()
 root.mainloop()
