@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from SeeChem_Image_Functions import Load_svg, Load_png
-from SeeChem_Create_Pages_Functions import Create_topbars, Create_background, Create_aboutus
+from SeeChem_Functions_Image import Load_svg, Load_png
+from SeeChem_Functions_Create_Pages import Create_topbars, Create_background, Create_aboutus
 
 # root
 root=Tk()
