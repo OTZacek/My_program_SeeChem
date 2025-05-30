@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from SeeChem_Functions_Image import Load_svg, Load_png
+from SeeChem_Functions_Image import Load_png
 from SeeChem_Functions_Create_Pages import Create_topbars, Create_background, Create_aboutus
 
 # root
@@ -9,7 +9,6 @@ root=Tk()
 root.title("SeeChem App")
 root.geometry("1024x768")
 # root.attributes('-fullscreen', True) # to force into full screen
-#root.wm_attributes("-transparent", 0)
 
 # seechem icon
 seechem_icon = PhotoImage(file="imagebase/SeeChem_icon.png")
@@ -50,8 +49,12 @@ pages["simulator"] = simulator_frame
 class access_page():
     def __init__(self, master):
 
-        login_frame = Frame(master)
-        login_frame.pack(pady=300)
+        USER_FILE = "SeeChem_users_accessinfo.rtf"
+
+        self.canvas, self.bg_photo = Create_background(master, "imagebase/login_page_bg.png")
+
+        login_frame = Frame(self.canvas)
+        login_frame.pack(pady=350)
 
         self.username_label = Label(login_frame, text="Username:")
         self.username_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
@@ -68,32 +71,31 @@ class access_page():
         self.confirm_password_entry = Entry(login_frame, show="*")
         self.confirm_password_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        self.create_button = Button(login_frame, text="Create Account")
+        def save_user(username, password):
+            with open(USER_FILE, "w") as f:
+                f.write(f"{{\\rtf1\\ansi\\deff0\n")
+                f.write(f"Username: {username}\\line\n")
+                f.write(f"Password: {password}\\line\n")
+                f.write("}")
+
+        def create_account():
+            username = self.username_entry.get()
+            password = self.password_entry.get()
+            confirm_password = self.confirm_password_entry.get()
+            
+            if not username or not password or not confirm_password:
+                messagebox.showwarning("Warning", "All fields are required!")
+            elif confirm_password != password:
+                messagebox.showerror("Error", "Passwords not match!")
+            else:
+                save_user(username, password)
+                messagebox.showinfo("Success", "Welcome to SeeChem!")
+                self.username_entry.delete(0, END)
+                self.password_entry.delete(0, END)
+                self.confirm_password_entry.delete(0, END)
+
+        self.create_button = Button(login_frame, text="Create Account", command=create_account)
         self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
-
-        username = self.username_entry.get()
-        password = self.password_entry.get()
-        confirm_password = self.confirm_password_entry.get()
-
-        if not username or not password:
-            messagebox.showerror("Error", "Username and password are required.")
-            return
-
-        if password != confirm_password:
-            messagebox.showerror("Error", "Passwords do not match.")
-            return
-
-        user_data = {
-            "username": username,
-            "password": password
-        }
-
-        messagebox.showinfo("Success", "Account created successfully!")
-        print(user_data)
-
-        self.username_entry.delete(0, END)
-        self.password_entry.delete(0, END)
-        self.confirm_password_entry.delete(0, END)
 
 a = access_page(access_page_frame)
 
@@ -106,17 +108,18 @@ class welcome_page():
         # when the functions all finished, 
         # simple remove the '#' and change all the widgets master to self.canvas
         #)
-        #self.canvas, self.bg_photo = Create_background(master, "imagebase/welcome_page_bg.png")
+        self.canvas, self.bg_photo = Create_background(master, "imagebase/welcome_page_bg.png")
 
         # button functions
         def Log_in():
+            messagebox.showwarning("Warning", "Log in page not yet finished... redirect to Homepage")
             pages["home"].tkraise()
 
         def Create_account():
             pages["create_account"].tkraise()
         
         # text
-        self.w_txtframe = Frame(master)
+        self.w_txtframe = Frame(self.canvas)
         self.w_txtframe.pack(padx=50, pady=80, anchor="w")
 
         self.w_text1 = Label(self.w_txtframe, text="Welcome to SeeChem", font=("Poppins", 80, "bold"))
@@ -126,7 +129,7 @@ class welcome_page():
         self.w_text2.grid(row=1, column=0, sticky="w")
 
         # btn
-        self.w_btnframe = Frame(master)
+        self.w_btnframe = Frame(self.canvas)
         self.w_btnframe.pack(padx=100, pady=50, anchor="w")
 
         self.w_btn_log = Button(
@@ -142,7 +145,7 @@ class welcome_page():
         self.w_btn_guest.grid(row=2, column=0, pady=5, sticky="w")
 
         # logo & image
-        self.w_logoframe = Frame(master)
+        self.w_logoframe = Frame(self.canvas)
         self.w_logoframe.pack(padx=30, pady=50, side="bottom", anchor="w")
 
         self.logobig = Load_png("imagebase/SeeChemLogo101.png", width=200)
