@@ -39,7 +39,7 @@ periodic_table_chart_frame.grid(row=0, column=0, sticky="nesw")
 simulator_frame.grid(row=0, column=0, sticky="nesw")
 
 #3
-pages["create_account"] = access_page_frame
+pages["access_page"] = access_page_frame
 pages["welcome"] = welcome_page_frame
 pages["home"] = home_page_frame
 pages["periodict"] = periodic_table_chart_frame
@@ -71,31 +71,62 @@ class access_page():
         self.confirm_password_entry = Entry(login_frame, show="*")
         self.confirm_password_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        def save_user(username, password):
-            with open(USER_FILE, "w") as f:
-                f.write(f"{{\\rtf_User's Info\n")
-                f.write(f"Username: {username}\\line\n")
-                f.write(f"Password: {password}\\line\n")
-                f.write("}")
+        def set_mode(self, mode):
+            self.mode = mode
 
-        def create_account():
-            username = self.username_entry.get()
-            password = self.password_entry.get()
-            confirm_password = self.confirm_password_entry.get()
-            
-            if not username or not password or not confirm_password:
-                messagebox.showwarning("Warning", "All fields are required!")
-            elif confirm_password != password:
-                messagebox.showerror("Error", "Passwords not match!")
-            else:
-                save_user(username, password)
-                messagebox.showinfo("Success", "Welcome to SeeChem!")
-                self.username_entry.delete(0, END)
-                self.password_entry.delete(0, END)
-                self.confirm_password_entry.delete(0, END)
+            if mode == "Log in":
 
-        self.create_button = Button(login_frame, text="Create Account", command=create_account)
-        self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
+                self.confirm_password_label.pack_forget()
+                self.confirm_password_entry.pack_forget()
+
+                # def log_in():
+                #     login_dict = {}
+                #     with open("SeeChem_users_accessinfo.rtf", "r") as file:
+                #         for line in file.readlines():
+                #             line = line.strip()
+                #             if line:
+                #                 username, password = line.split(',')
+                #                 login_dict[username] = password
+
+                #                 entered_username = self.username_entry.get()
+                #                 entered_password = self.password_entry.get()
+
+                #                 if entered_username in login_dict and login_dict[entered_username] == entered_password:
+                #                     messagebox.showinfo("Info", "Log in successful!")
+                #                 else:
+                #                     messagebox.showerror("Error", "Invalid account or password")
+                    
+                self.login_button = Button(login_frame, text="Log in")#, command=log_in)
+                self.login_button.grid(row=3, column=0, columnspan=2, pady=20)
+
+
+            elif mode == "Create Account":
+
+                def save_user_info(username, password):
+                    with open(USER_FILE, "w") as f:
+                        f.write(f"\\User's account and password\n")
+                        f.write(f"Username: {username}\\line\n")
+                        f.write(f"Password: {password}\\line\n")
+                        f.write("}")
+
+                def create_account():
+                    username = self.username_entry.get()
+                    password = self.password_entry.get()
+                    confirm_password = self.confirm_password_entry.get()
+                    
+                    if not username or not password or not confirm_password:
+                        messagebox.showwarning("Warning", "All fields are required!")
+                    elif confirm_password != password:
+                        messagebox.showerror("Error", "Passwords not match!")
+                    else:
+                        save_user_info(username, password)
+                        messagebox.showinfo("Success", "Welcome to SeeChem!")
+                        self.username_entry.delete(0, END)
+                        self.password_entry.delete(0, END)
+                        self.confirm_password_entry.delete(0, END)
+
+                        self.create_button = Button(login_frame, text="Create Account", command=create_account)
+                        self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
 
 a = access_page(access_page_frame)
 
@@ -116,7 +147,7 @@ class welcome_page():
             pages["home"].tkraise()
 
         def Create_account():
-            pages["create_account"].tkraise()
+            pages["access_page"].tkraise()
         
         # text
         self.w_txtframe = Frame(self.canvas)
