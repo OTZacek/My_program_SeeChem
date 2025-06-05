@@ -30,6 +30,7 @@ welcome_page_frame = Frame(main_container)
 home_page_frame = Frame(main_container)
 periodic_table_chart_frame = Frame(main_container)
 simulator_frame = Frame(main_container)
+chemical_principles_frame = Frame(main_container)
 
 #2
 access_page_frame.grid(row=0, column=0, sticky="nesw")
@@ -37,6 +38,7 @@ welcome_page_frame.grid(row=0, column=0, sticky="nsew")
 home_page_frame.grid(row=0, column=0, sticky="nesw")
 periodic_table_chart_frame.grid(row=0, column=0, sticky="nesw")
 simulator_frame.grid(row=0, column=0, sticky="nesw")
+chemical_principles_frame.grid(row=0, column=0, sticky="nesw")
 
 #3
 pages["access_page"] = access_page_frame
@@ -44,6 +46,7 @@ pages["welcome"] = welcome_page_frame
 pages["home"] = home_page_frame
 pages["periodict"] = periodic_table_chart_frame
 pages["simulator"] = simulator_frame
+pages["chemical_principles"] = chemical_principles_frame
 
 # class
 class access_page():
@@ -71,62 +74,73 @@ class access_page():
         self.confirm_password_entry = Entry(login_frame, show="*")
         self.confirm_password_entry.grid(row=2, column=1, padx=10, pady=10)
 
-        def set_mode(self, mode):
-            self.mode = mode
+        #define what is create_account first in case.
+        def create_account():
+            username = self.username_entry.get()
+            password = self.password_entry.get()
+            confirm_password = self.confirm_password_entry.get()
+            
+            if not username or not password or not confirm_password:
+                messagebox.showwarning("Warning", "All fields are required!")
+            elif confirm_password != password:
+                messagebox.showerror("Error", "Passwords not match!")
+            else:
+                save_user_info(username, password)
+                messagebox.showinfo("Success", "Welcome to SeeChem!")
+                self.username_entry.delete(0, END)
+                self.password_entry.delete(0, END)
+                self.confirm_password_entry.delete(0, END)
 
-            if mode == "Log in":
+        self.create_button = Button(login_frame, text="Create Account", command=create_account)
+        self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
 
-                self.confirm_password_label.pack_forget()
-                self.confirm_password_entry.pack_forget()
+        def save_user_info(username, password):
+            with open(USER_FILE, "w") as f:
+                f.write(f"\\User's account and password\n")
+                f.write(f"Username: {username}\\line\n")
+                f.write(f"Password: {password}\\line\n")
+                f.write("}")
 
-                # def log_in():
-                #     login_dict = {}
-                #     with open("SeeChem_users_accessinfo.rtf", "r") as file:
-                #         for line in file.readlines():
-                #             line = line.strip()
-                #             if line:
-                #                 username, password = line.split(',')
-                #                 login_dict[username] = password
+    # def set_mode(self, mode):
+    #     self.mode = mode
 
-                #                 entered_username = self.username_entry.get()
-                #                 entered_password = self.password_entry.get()
+    #     if mode == "Log in":
 
-                #                 if entered_username in login_dict and login_dict[entered_username] == entered_password:
-                #                     messagebox.showinfo("Info", "Log in successful!")
-                #                 else:
-                #                     messagebox.showerror("Error", "Invalid account or password")
-                    
-                self.login_button = Button(login_frame, text="Log in")#, command=log_in)
-                self.login_button.grid(row=3, column=0, columnspan=2, pady=20)
+    #         self.confirm_password_label.pack_forget()
+    #         self.confirm_password_entry.pack_forget()
+
+    # def log_in(self):
+    #     login_dict = {}
+    #     try:
+    #         with open(self.USER_FILE, "r") as file:
+    #             for line in file.readlines():
+    #                 line = line.strip()
+    #                 if line and ":" in line:
+    #                     key, value = line.split(":", 1)
+    #                     if "Username" in key:
+    #                         username = value.split("\\")[0].strip()
+    #                     elif "Password" in key:
+    #                         password = value.split("\\")[0].strip()
+    #                         login_dict[username] = password
+        
+    #         entered_username = self.username_entry.get()
+    #         entered_password = self.password_entry.get()
+            
+    #         if entered_username in login_dict and login_dict[entered_username] == entered_password:
+    #             messagebox.showinfo("Info", "Log in successful!")
+    #         else:
+    #             messagebox.showerror("Error", "Invalid account or password")
+    #     except FileNotFoundError:
+    #         messagebox.showerror("Error", "No user accounts found. Please create an account first.")
+
+                
+    #         self.login_button = Button(login_frame, text="Log in", command=log_in)
+    #         self.login_button.grid(row=3, column=0, columnspan=2, pady=20)
 
 
-            elif mode == "Create Account":
+    #     elif mode == "Create Account":
 
-                def save_user_info(username, password):
-                    with open(USER_FILE, "w") as f:
-                        f.write(f"\\User's account and password\n")
-                        f.write(f"Username: {username}\\line\n")
-                        f.write(f"Password: {password}\\line\n")
-                        f.write("}")
-
-                def create_account():
-                    username = self.username_entry.get()
-                    password = self.password_entry.get()
-                    confirm_password = self.confirm_password_entry.get()
-                    
-                    if not username or not password or not confirm_password:
-                        messagebox.showwarning("Warning", "All fields are required!")
-                    elif confirm_password != password:
-                        messagebox.showerror("Error", "Passwords not match!")
-                    else:
-                        save_user_info(username, password)
-                        messagebox.showinfo("Success", "Welcome to SeeChem!")
-                        self.username_entry.delete(0, END)
-                        self.password_entry.delete(0, END)
-                        self.confirm_password_entry.delete(0, END)
-
-                        self.create_button = Button(login_frame, text="Create Account", command=create_account)
-                        self.create_button.grid(row=3, column=0, columnspan=2, pady=20)
+    #         self
 
 a = access_page(access_page_frame)
 
@@ -135,10 +149,7 @@ a = access_page(access_page_frame)
 class welcome_page():
     def __init__(self, master):
 
-        # background (
-        # when the functions all finished, 
-        # simple remove the '#' and change all the widgets master to self.canvas
-        #)
+        # background
         self.canvas, self.bg_photo = Create_background(master, "imagebase/welcome_page_bg.png")
 
         # button functions
@@ -159,7 +170,7 @@ class welcome_page():
         self.w_text2 = Label(self.w_txtframe, text="where you start your chemistry", font=("Poppins", 50))
         self.w_text2.grid(row=1, column=0, sticky="w")
 
-        # btn
+        # button
         self.w_btnframe = Frame(self.canvas)
         self.w_btnframe.pack(padx=100, pady=50, anchor="w")
 
@@ -215,7 +226,7 @@ class home_page():
         self.h_text1 = Label(self.h_txtframe, text="Set up the experiments…", font=("LaoSangamMN", 50))
         self.h_text1.pack()
 
-        # btn
+        # button
         self.h_frame_container = Frame(master)
         self.h_frame_container.pack(padx=100, pady=30, anchor="center")
         
@@ -274,10 +285,56 @@ class simulator():
 
         # text
 
+        # button
+
+
+        # calculate pH program
+        calculate_pH_frame = Frame(master)
+        calculate_pH_frame.pack()
+
+        calculate_pH_txt_label = Label(calculate_pH_frame)
+        calculate_pH_txt_label.pack()
+
+        calculate_pH_input = Entry(calculate_pH_frame)
+        calculate_pH_input.pack()
+
+
+
+
+
+
         # about us
         Create_aboutus(master)
 
 s = simulator(simulator_frame)
+
+
+class chemical_principles():
+    def __init__(self, master):
+
+        Create_topbars(master, "Chemical Principles")
+
+        # image
+
+        # text
+        # self.c_txt_top_frame = Frame(master)
+        # self.c_txt_top_frame.pack(pady=50, anchor="center")
+
+        # self.c_text1 = Label(self.c_txt_top_frame, text="Chemical Basic Knowledge & Principles", font=("LaoSangamMN", 50))
+        # self.c_text1.pack()
+
+        # self.c_txt_main_frame = Frame(master)
+        # self.c_txt_main_frame.pack(pady=50)
+
+        # self.c_txt1 = Label(self.c_txt_main_frame)
+
+        
+
+        
+
+        # button
+
+c = chemical_principles(chemical_principles_frame)
 
 pages["welcome"].tkraise()
 root.mainloop()
