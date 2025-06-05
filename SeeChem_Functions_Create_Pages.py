@@ -13,7 +13,7 @@ def Create_background(master, image_path):
         bg_image = bg_image.resize((width, height), Image.LANCZOS)
         bg_photo = ImageTk.PhotoImage(bg_image)
         
-        canvas = Canvas(master, width=width, height=height)
+        canvas = Canvas(master, width=width, height=height, highlightthickness=0, bd=0)
         canvas.pack(fill="both", expand=True)
         canvas.create_image(0, 0, anchor="nw", image=bg_photo)
         
