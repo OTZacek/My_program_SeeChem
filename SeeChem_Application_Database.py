@@ -1,1 +1,0 @@
-# SeeChem Application Database
