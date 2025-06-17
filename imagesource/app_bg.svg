@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2560 1600.39">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" y=".39" width="2560" height="1600"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="1.67" y1="1601.08" x2=".72" y2="1600.84" gradientTransform="translate(-1700 2562327.62) scale(2560 -1600)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#222488"/>
+      <stop offset=".22" stop-color="#12169b"/>
+      <stop offset="1" stop-color="#6627cb"/>
+    </linearGradient>
+  </defs>
+  <g class="cls-3">
+    <g id="Custom_Size_9" data-name="Custom Size 9">
+      <rect class="cls-2" width="2560" height="1600"/>
+    </g>
+  </g>
+</svg>

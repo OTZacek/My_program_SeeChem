@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fdfdfd;
+      }
+    </style>
+  </defs>
+  <path id="Union_16" data-name="Union 16" class="cls-1" d="M0,64v-8c0-8.8,14.4-16,32-16s32,7.2,32,16v8H0ZM16,16C16,7.16,23.16,0,32,0s16,7.16,16,16-7.16,16-16,16-16-7.16-16-16Z"/>
+</svg>

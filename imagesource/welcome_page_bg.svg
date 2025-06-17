@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2560 1600">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12, .cls-13 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 5 10;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11, .cls-12, .cls-13 {
+        stroke: #fff;
+      }
+
+      .cls-2, .cls-4, .cls-6, .cls-8, .cls-10 {
+        stroke-width: 7px;
+      }
+
+      .cls-14 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        stroke-dasharray: 3;
+      }
+
+      .cls-3, .cls-11 {
+        stroke-width: 4px;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 6;
+      }
+
+      .cls-5 {
+        stroke-width: 5px;
+      }
+
+      .cls-6 {
+        stroke-dasharray: 5;
+      }
+
+      .cls-7 {
+        stroke-width: 6px;
+      }
+
+      .cls-8 {
+        stroke-dasharray: 4;
+      }
+
+      .cls-9 {
+        stroke-width: 13px;
+      }
+
+      .cls-15 {
+        fill: #fff;
+      }
+
+      .cls-12 {
+        stroke-dasharray: 10 10;
+        stroke-width: 15px;
+      }
+
+      .cls-16 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" width="2560" height="1600"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1=".9" y1="1601.51" x2="1.4" y2="1600.64" gradientTransform="translate(-1700 2562476.53) scale(2560 -1600)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#171ba3" stop-opacity=".97"/>
+      <stop offset="1" stop-color="#0e105d" stop-opacity=".97"/>
+    </linearGradient>
+  </defs>
+  <g class="cls-16">
+    <g id="Custom_Size_9" data-name="Custom Size 9">
+      <rect class="cls-14" width="2560" height="1600"/>
+      <g id="Ellipse_127" data-name="Ellipse 127">
+        <circle class="cls-15" cx="1906.5" cy="804.5" r="61.5"/>
+        <circle class="cls-13" cx="1906.5" cy="804.5" r="61"/>
+      </g>
+      <g id="Ellipse_128" data-name="Ellipse 128">
+        <circle class="cls-15" cx="1907" cy="584" r="42"/>
+        <circle class="cls-13" cx="1907" cy="584" r="41.5"/>
+      </g>
+      <g id="Ellipse_129" data-name="Ellipse 129">
+        <circle class="cls-15" cx="1710.5" cy="948.5" r="53.5"/>
+        <circle class="cls-13" cx="1710.5" cy="948.5" r="53"/>
+      </g>
+      <g id="Ellipse_130" data-name="Ellipse 130">
+        <circle class="cls-15" cx="2037" cy="998" r="49"/>
+        <circle class="cls-13" cx="2037" cy="998" r="48.5"/>
+      </g>
+      <g id="Ellipse_131" data-name="Ellipse 131">
+        <circle class="cls-15" cx="2086.5" cy="800.5" r="47.5"/>
+        <circle class="cls-13" cx="2086.5" cy="800.5" r="47"/>
+      </g>
+      <line id="Line_1" data-name="Line 1" class="cls-10" x1="1908.5" y1="597.5" x2="1907.5" y2="804.5"/>
+      <line id="Line_2" data-name="Line 2" class="cls-10" x1="1710.5" y1="948.5" x2="1899.5" y2="804.5"/>
+      <line id="Line_3" data-name="Line 3" class="cls-6" x1="1907.5" y1="804.5" x2="2086.5" y2="804.5"/>
+      <line id="Line_4" data-name="Line 4" class="cls-10" x1="1899.5" y1="813.5" x2="2037.5" y2="988.5"/>
+      <g id="Ellipse_132" data-name="Ellipse 132">
+        <circle class="cls-15" cx="2229.5" cy="678.5" r="45.5"/>
+        <circle class="cls-13" cx="2229.5" cy="678.5" r="45"/>
+      </g>
+      <g id="Ellipse_133" data-name="Ellipse 133">
+        <circle class="cls-15" cx="2360.5" cy="813.5" r="43.5"/>
+        <circle class="cls-13" cx="2360.5" cy="813.5" r="43"/>
+      </g>
+      <g id="Ellipse_134" data-name="Ellipse 134">
+        <path class="cls-15" d="M2560,682.7c-5.72,3.37-12.38,5.3-19.5,5.3-21.26,0-38.5-17.24-38.5-38.5s17.24-38.5,38.5-38.5c7.12,0,13.78,1.93,19.5,5.3"/>
+        <circle class="cls-13" cx="2540.5" cy="649.5" r="38"/>
+      </g>
+      <g id="Ellipse_135" data-name="Ellipse 135">
+        <circle class="cls-15" cx="2153.5" cy="521.5" r="36.5"/>
+        <circle class="cls-13" cx="2153.5" cy="521.5" r="36"/>
+      </g>
+      <g id="Ellipse_136" data-name="Ellipse 136">
+        <circle class="cls-15" cx="2326" cy="466" r="39"/>
+        <circle class="cls-13" cx="2326" cy="466" r="38.5"/>
+      </g>
+      <g id="Ellipse_137" data-name="Ellipse 137">
+        <circle class="cls-15" cx="2422.5" cy="381.5" r="35.5"/>
+        <circle class="cls-13" cx="2422.5" cy="381.5" r="35"/>
+      </g>
+      <g id="Ellipse_138" data-name="Ellipse 138">
+        <circle class="cls-15" cx="2345.5" cy="267.5" r="35.5"/>
+        <circle class="cls-13" cx="2345.5" cy="267.5" r="35"/>
+      </g>
+      <g id="Ellipse_139" data-name="Ellipse 139">
+        <ellipse class="cls-15" cx="2454.5" cy="208" rx="24.5" ry="24"/>
+        <ellipse class="cls-13" cx="2454.5" cy="208" rx="24" ry="23.5"/>
+      </g>
+      <g id="Ellipse_140" data-name="Ellipse 140">
+        <circle class="cls-15" cx="2343" cy="184" r="17"/>
+        <circle class="cls-13" cx="2343" cy="184" r="16.5"/>
+      </g>
+      <g id="Ellipse_141" data-name="Ellipse 141">
+        <circle class="cls-15" cx="2256" cy="268" r="18"/>
+        <circle class="cls-13" cx="2256" cy="268" r="17.5"/>
+      </g>
+      <g id="Ellipse_142" data-name="Ellipse 142">
+        <circle class="cls-15" cx="2298.5" cy="340.5" r="23.5"/>
+        <circle class="cls-13" cx="2298.5" cy="340.5" r="23"/>
+      </g>
+      <g id="Ellipse_143" data-name="Ellipse 143">
+        <path class="cls-15" d="M2560,416.82c-.82.12-1.65.18-2.5.18-9.66,0-17.5-7.84-17.5-17.5s7.84-17.5,17.5-17.5c.85,0,1.68.06,2.5.18"/>
+        <circle class="cls-13" cx="2557.5" cy="399.5" r="17"/>
+      </g>
+      <line id="Line_5" data-name="Line 5" class="cls-10" x1="2360" y1="1056" x2="2540" y2="1316"/>
+      <line id="Line_6" data-name="Line 6" class="cls-5" x1="2458" y1="201" x2="2425" y2="390"/>
+      <line id="Line_7" data-name="Line 7" class="cls-3" x1="2346" y1="184" x2="2346" y2="268"/>
+      <line id="Line_8" data-name="Line 8" class="cls-10" x1="2299" y1="333" x2="2346" y2="271"/>
+      <line id="Line_9" data-name="Line 9" class="cls-8" x1="2353" y1="258" x2="2424" y2="407"/>
+      <line id="Line_10" data-name="Line 10" class="cls-7" x1="2423" y1="370" x2="2333" y2="468"/>
+      <line id="Line_11" data-name="Line 11" class="cls-2" x1="2334" y1="466" x2="2236" y2="679"/>
+      <line id="Line_12" data-name="Line 12" class="cls-4" x1="2237" y1="679" x2="2365" y2="814"/>
+      <line id="Line_13" data-name="Line 13" class="cls-10" x1="2162" y1="522" x2="2237" y2="688"/>
+      <line id="Line_14" data-name="Line 14" class="cls-10" x1="2230" y1="679" x2="2094" y2="814"/>
+      <line id="Line_15" data-name="Line 15" class="cls-10" x1="2365" y1="814" x2="2366" y2="1047"/>
+      <line id="Line_16" data-name="Line 16" class="cls-11" x1="2263" y1="268" x2="2346" y2="271"/>
+      <line id="Line_17" data-name="Line 17" class="cls-4" x1="2528" y1="658" x2="2371" y2="814"/>
+      <line id="Line_18" data-name="Line 18" class="cls-10" x1="2558" y1="400" x2="2430" y2="382"/>
+      <g id="Ellipse_144" data-name="Ellipse 144">
+        <path class="cls-15" d="M2560,1356.76c-3.7.81-7.55,1.24-11.5,1.24-29.55,0-53.5-23.95-53.5-53.5s23.95-53.5,53.5-53.5c4.07,0,8.03.45,11.84,1.31"/>
+        <circle class="cls-13" cx="2548.5" cy="1304.5" r="53"/>
+      </g>
+      <g id="Ellipse_145" data-name="Ellipse 145">
+        <circle class="cls-15" cx="2365.5" cy="1055.5" r="53.5"/>
+        <circle class="cls-13" cx="2365.5" cy="1055.5" r="53"/>
+      </g>
+      <g id="Ellipse_146" data-name="Ellipse 146">
+        <path class="cls-15" d="M1804.13,1600c-2.71-14.42-4.13-29.29-4.13-44.5,0-132.27,107.23-239.5,239.5-239.5s239.5,107.23,239.5,239.5c0,15.21-1.42,30.08-4.13,44.5"/>
+        <circle class="cls-13" cx="2039.5" cy="1555.5" r="239"/>
+      </g>
+      <line id="Line_19" data-name="Line 19" class="cls-12" x1="2366" y1="1056" x2="2037" y2="1515"/>
+      <g id="Ellipse_147" data-name="Ellipse 147">
+        <circle class="cls-15" cx="1710.5" cy="1212.5" r="103.5"/>
+        <circle class="cls-13" cx="1710.5" cy="1212.5" r="103"/>
+      </g>
+      <line id="Line_20" data-name="Line 20" class="cls-9" x1="1705.5" y1="1212.5" x2="1997.5" y2="1498.5"/>
+    </g>
+  </g>
+</svg>

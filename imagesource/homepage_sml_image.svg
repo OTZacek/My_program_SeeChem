@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 413 238">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#radial-gradient);
+      }
+
+      .cls-2, .cls-3 {
+        isolation: isolate;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 3;
+      }
+
+      .cls-4, .cls-5 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 7px;
+      }
+
+      .cls-6, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        font-family: LaoSangamMN, 'Lao Sangam MN';
+        font-size: 60px;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="-1197.1" cy="1591.99" fx="-1197.1" fy="1591.99" r="1.34" gradientTransform="translate(705510.32 -65374.8) rotate(-39.86) scale(305.61 -252.48) skewX(-24.11)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4246b7"/>
+      <stop offset="1" stop-color="#261f7b"/>
+    </radialGradient>
+  </defs>
+  <rect id="Rectangle_184" data-name="Rectangle 184" class="cls-1" width="413" height="238" rx="44" ry="44"/>
+  <g id="Simulator_" data-name="Simulator " class="cls-2">
+    <text class="cls-3" transform="translate(85 82)"><tspan x="0" y="0">Simula</tspan><tspan class="cls-7" x="174.26" y="0">t</tspan><tspan x="191.89" y="0">or</tspan></text>
+  </g>
+  <circle id="Ellipse_127" data-name="Ellipse 127" class="cls-6" cx="209" cy="167" r="13"/>
+  <ellipse id="Ellipse_128" data-name="Ellipse 128" class="cls-6" cx="208.5" cy="121" rx="8.5" ry="9"/>
+  <ellipse id="Ellipse_129" data-name="Ellipse 129" class="cls-6" cx="168.5" cy="196.5" rx="11.5" ry="10.5"/>
+  <circle id="Ellipse_130" data-name="Ellipse 130" class="cls-6" cx="236" cy="207" r="10"/>
+  <ellipse id="Ellipse_131" data-name="Ellipse 131" class="cls-6" cx="246.5" cy="166" rx="9.5" ry="10"/>
+  <line id="Line_1" data-name="Line 1" class="cls-5" x1="209.38" y1="124.06" x2="209.17" y2="166.86"/>
+  <line id="Line_2" data-name="Line 2" class="cls-5" x1="168.44" y1="196.64" x2="207.52" y2="166.86"/>
+  <line id="Line_3" data-name="Line 3" class="cls-4" x1="209.17" y1="166.86" x2="246.18" y2="166.86"/>
+  <line id="Line_4" data-name="Line 4" class="cls-5" x1="207.52" y1="168.72" x2="236.05" y2="204.9"/>
+</svg>
