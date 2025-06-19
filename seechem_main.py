@@ -180,11 +180,18 @@ class access(QWidget):
         acc_btn_widget.layout().addWidget(acc_btn1)
         acc_btn1.clicked.connect(lambda: switch_func(0))
 
-        acc_btn2 = QPushButton("Create Account" if self.mode == "create acc" else "log in")
+        if self.mode == "create acc":
+            acc_btn2_name = "Create Account"
+            acc_btn2_function = self.create_account
+        else:
+            acc_btn2_name = "Log in"
+            acc_btn2_function = self.login
+
+        acc_btn2 = QPushButton(acc_btn2_name)
         acc_btn2.setStyleSheet("font-size: 15px; text-align: center; color: black; background-color: white; border-radius: 5px;")
         acc_btn_widget.layout().addWidget(acc_btn2)
-        acc_btn2.clicked.connect(self.create_account if self.mode == "create acc" else self.login)
-
+        acc_btn2.clicked.connect(acc_btn2_function)
+        
     def paintEvent(self, event):
         painter = QPainter(self)
         self.access_bg.render(painter, QRectF(self.rect()))
