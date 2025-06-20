@@ -5,6 +5,8 @@ from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtSvg import QSvgWidget as qsvg
 from PyQt5.QtCore import Qt, QRectF
 
+from seechem_menubar import seechem_menubar
+
 # base, switch page and apply changes globally
 class switch(QWidget):
     def __init__(self):
@@ -21,9 +23,10 @@ class switch(QWidget):
         self.stack.addWidget(self.access)
         self.stack.addWidget(self.home)
 
-        layout = QVBoxLayout(self)
-        layout.addWidget(self.stack)
-        layout.setContentsMargins(0,0,0,0) # to ensure the bg can perfectly fit the windows
+        self.layout = QVBoxLayout(self)
+        self.menubar = None # insure no menubar initially
+        self.layout.addWidget(self.stack)
+        self.layout.setContentsMargins(0,0,0,0) # to ensure the bg can perfectly fit the windows
 
     app_bg = QSvgRenderer("imagesource/app_bg.svg")
 
@@ -33,12 +36,23 @@ class switch(QWidget):
             self.app_bg.render(painter, QRectF(self.rect()))
 
     def switch_p(self, index, mode=None):
+        if index != 0 and index != 1:
+            if not self.menubar:
+                self.menubar = seechem_menubar(self.switch_p)
+                self.layout.insertWidget(0, self.menubar)
+        else:
+            if self.menubar:
+                self.layout.removeWidget(self.menubar)
+                self.menubar.deleteLater()
+                self.menubar = None
+
         if index == 1 and mode:
             self.access = access(self.switch_p, mode)
             self.stack.removeWidget(self.stack.widget(1))
             self.stack.insertWidget(1, self.access)
         
         self.stack.setCurrentIndex(index)
+
 
 
 # the welcome page (0)
@@ -76,21 +90,31 @@ class welcome(QWidget):
 
 
         wel_button1 = QPushButton("➔ Log in")
-        wel_button1.setStyleSheet("font-size: 30px; text-align: left; " \
-        "color: white; border: none; background-color: transparent;")
+        wel_button1.setStyleSheet("""
+        font-size: 30px; text-align: left; color: white; 
+        border: none; background-color: transparent;
+        """)
         wel_button_widget.layout().addWidget(wel_button1)
         wel_button1.clicked.connect(lambda: switch_func(1, "log in"))
 
         wel_button2 = QPushButton("➔ Create account")
-        wel_button2.setStyleSheet("font-size: 30px; text-align: left; " \
-        "color: white; border: none; background-color: transparent;")
+        wel_button2.setStyleSheet("""
+        font-size: 30px; text-align: left; color: white; 
+        border: none; background-color: transparent;
+        """)
         wel_button_widget.layout().addWidget(wel_button2)
         wel_button2.clicked.connect(lambda: switch_func(1, "create acc"))
 
         wel_button3 = QPushButton("➔ Continue as a guest")
-        wel_button3.setStyleSheet("font-size: 30px; text-align: left; " \
-        "color: white; border: none; background-color: transparent;")
+        wel_button3.setStyleSheet("""
+        font-size: 30px; text-align: left; color: white; 
+        border: none; background-color: transparent;
+        """)
         wel_button_widget.layout().addWidget(wel_button3)
+
+        fastbutton = QPushButton("HOME")
+        wel_button_widget.layout().addWidget(fastbutton)
+        fastbutton.clicked.connect(lambda: switch_func(2))
 
         #logo
         wel_logo_widget = QWidget()
@@ -176,7 +200,10 @@ class access(QWidget):
         acc_widget2.layout().addWidget(acc_btn_widget)
         
         acc_btn1 = QPushButton("Back")
-        acc_btn1.setStyleSheet("font-size: 15px; text-align: center; color: black; background-color: white; border-radius: 5px;")
+        acc_btn1.setStyleSheet("""
+                               font-size: 15px; text-align: center; color: black; 
+                               background-color: white; border-radius: 5px;
+                               """)
         acc_btn_widget.layout().addWidget(acc_btn1)
         acc_btn1.clicked.connect(lambda: switch_func(0))
 
@@ -188,7 +215,10 @@ class access(QWidget):
             acc_btn2_function = self.login
 
         acc_btn2 = QPushButton(acc_btn2_name)
-        acc_btn2.setStyleSheet("font-size: 15px; text-align: center; color: black; background-color: white; border-radius: 5px;")
+        acc_btn2.setStyleSheet("""
+                               font-size: 15px; text-align: center; color: black; 
+                               background-color: white; border-radius: 5px;
+                               """)
         acc_btn_widget.layout().addWidget(acc_btn2)
         acc_btn2.clicked.connect(acc_btn2_function)
         
@@ -212,7 +242,7 @@ class access(QWidget):
         try:
             with open("accounts.txt", "a") as file:
                 file.write(f"{username},{password}\n")
-            QMessageBox.information(self, "Success", "Account created successfully!")
+            QMessageBox.information(self, "Success", "Welcome to SeeChem!")
             self.acc_enter1.clear()
             self.acc_enter2.clear()
             self.acc_enter3.clear()
@@ -243,7 +273,8 @@ class access(QWidget):
             QMessageBox.critical(self, "Error", "Accounts file not found!")
         except Exception as e:  # error seeking
             QMessageBox.critical(self, "Error", f"An error occurred during login: {e}")
-    
+
+
 
 # the homepage (2)
 class home(QWidget):
