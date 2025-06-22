@@ -2,11 +2,11 @@ from PyQt5.QtWidgets import QStackedWidget, QVBoxLayout, QWidget, QApplication
 from PyQt5.QtGui import QPainter, QIcon
 from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtCore import QRectF
-from seechem_menubar import seechem_menubar
+from func_menubar import seechem_menubar
 
-from pages_welcome import welcome
-from pages_access import access
-from pages_home import home
+from pages1_welcome import welcome
+from pages2_access import access
+from pages3_home import home
 
 # base, switch page and apply changes globally
 class switch(QWidget):

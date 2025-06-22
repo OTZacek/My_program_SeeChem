@@ -5,8 +5,6 @@ from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtSvg import QSvgWidget as qsvg
 from PyQt5.QtCore import Qt, QRectF
 
-from seechem_menubar import seechem_menubar
-
 class home(QWidget):
     def __init__(self, switch_func):
         super().__init__()

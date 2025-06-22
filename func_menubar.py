@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QHBoxLayout, QPushButton, QMenu
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import QSize
 import sys
 
 

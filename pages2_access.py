@@ -4,8 +4,6 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtCore import Qt, QRectF
 
-from seechem_menubar import seechem_menubar
-
 class access(QWidget):
     def __init__(self, switch_func, mode="create acc"):
         super().__init__()
