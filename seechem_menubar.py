@@ -35,7 +35,7 @@ class seechem_menubar(QWidget):
         current_loc = QLabel("SeeChem")
         layout.addWidget(current_loc)
 
-        layout.addStretch()
+        layout.addStretch() # make the following buttons align to the right side
 
         account_btn = QPushButton()
         account_btn.setIcon(QIcon("imagesource/account_icon.svg"))
@@ -53,6 +53,12 @@ class seechem_menubar(QWidget):
         more_menu.addAction("Chemistry Principles")
         more_menu.addAction("If in Lab")
         more_menu.addAction("Setting")
-        more_menu.addAction("save 'n exit", lambda: sys.exit())
+        more_menu.addAction("Save 'n exit", lambda: sys.exit())
+
+        more_menu.setStyleSheet("""
+        QMenu {background-color: #12169B;}
+        QMenu::item {font-size: 15px; color: white; padding: 5px;}
+        QMenu::item:selected {background-color: #7C6FC1; border-radius: 5px;}
+        """)
 
         more_btn.setMenu(more_menu)
