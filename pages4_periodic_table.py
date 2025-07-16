@@ -1,14 +1,44 @@
-from PyQt5.QtWidgets import QStackedWidget, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QMenuBar, QToolBar, QApplication
-from PyQt5.QtWidgets import QDialog, QLineEdit, QMessageBox
-from PyQt5.QtGui import QPainter, QIcon
-from PyQt5.QtSvg import QSvgRenderer
-from PyQt5.QtSvg import QSvgWidget as qsvg
-from PyQt5.QtCore import Qt, QRectF
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QGridLayout
+from PyQt5.QtCore import Qt
 
-from func_menubar import seechem_menubar
+from seechem_funcs import box_shadow
 
-class periodic_tabel(QWidget):
+class periodic_table(QWidget):
     def __init__(self, switch_func):
         super().__init__()
-        self.setLayout(())
+        self.setLayout(QHBoxLayout())
+
+        periodic_table_content = QWidget()
+        periodic_table_content.setLayout(QGridLayout())
+        periodic_table_content.setStyleSheet("border-radius: 10px; background-color: #4428B9;")
+        box_shadow(periodic_table_content)
+        self.layout().addWidget(periodic_table_content, 6)
+
+        element_info = QWidget()
+        element_info.setLayout(QVBoxLayout())
+        element_info.setStyleSheet("border-radius: 10px; background-color: #2035D6;")
+        box_shadow(element_info)
+        self.layout().addWidget(element_info, 1)
+
+        element_info_title = ("Name:", "Atomic Number:", "Relative Mass:", "Category:", "Description:")
+
+        elements = [
+            (0, 0, "H"),
+            (0, 17, "He"),
+            (2, 1, "Li"),
+            (2, 2, "Be"),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ]
+
+        info_label = QLabel("Hover on an element to check the details of the element!")
+        info_label.setStyleSheet("color:white;")
+        element_info.layout().addWidget(info_label, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        
     

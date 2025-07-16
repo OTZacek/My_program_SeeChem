@@ -28,7 +28,7 @@ class home(QWidget):
         hom_recent_widget.setLayout(QVBoxLayout())
         hom_content_widget.layout().addWidget(hom_recent_widget, 5)
 
-        # home buttons
+        # let's create
 
         # recently created
         recent_label = QLabel("Recently Created")

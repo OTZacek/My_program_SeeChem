@@ -50,6 +50,7 @@ class access(QWidget):
         acc_widget3.layout().addWidget(acc_txt2_label)
 
         self.acc_enter2 = QLineEdit()
+        self.acc_enter2.setEchoMode(QLineEdit.Password)
         acc_widget4.layout().addWidget(self.acc_enter2)
 
         # Confirm password (only for create mode)

@@ -39,6 +39,7 @@ class seechem_menubar(QWidget):
 
         account_btn = QPushButton()
         account_btn.setIcon(QIcon("imagesource/account_icon.svg"))
+        account_btn.clicked.connect(lambda: self.switch_func(4))
         layout.addWidget(account_btn)
 
 
@@ -48,11 +49,10 @@ class seechem_menubar(QWidget):
         layout.addWidget(more_btn)
 
         more_menu = QMenu()
-        more_menu.addAction("Periodic Tabel")
+        more_menu.addAction("Periodic Tabel", lambda: self.switch_func(3))
         more_menu.addAction("Simulator")
         more_menu.addAction("Chemistry Principles")
         more_menu.addAction("If in Lab")
-        more_menu.addAction("Setting")
         more_menu.addAction("Save 'n exit", lambda: sys.exit())
 
         more_menu.setStyleSheet("""

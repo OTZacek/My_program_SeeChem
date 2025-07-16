@@ -7,6 +7,8 @@ from func_menubar import seechem_menubar
 from pages1_welcome import welcome
 from pages2_access import access
 from pages3_home import home
+from pages4_periodic_table import periodic_table
+from pages5_account import account
 
 # base, switch page and apply changes globally
 class switch(QWidget):
@@ -16,13 +18,17 @@ class switch(QWidget):
         self.setMinimumSize(1000, 625)
         self.setWindowTitle("SeeChem")
 
-        self.welcome = welcome(self.switch_p)   # 0
-        self.access = access(self.switch_p)     # 1
-        self.home = home(self.switch_p)         # 2
+        self.welcome = welcome(self.switch_p)
+        self.access = access(self.switch_p)
+        self.home = home(self.switch_p)
+        self.periodic_table = periodic_table(self.switch_p)
+        self.account = account(self.switch_p)
 
-        self.stack.addWidget(self.welcome)
-        self.stack.addWidget(self.access)
-        self.stack.addWidget(self.home)
+        self.stack.addWidget(self.welcome)          # 0
+        self.stack.addWidget(self.access)           # 1
+        self.stack.addWidget(self.home)             # 2
+        self.stack.addWidget(self.periodic_table)   # 3
+        self.stack.addWidget(self.account)          # 4
 
         self.layout = QVBoxLayout(self)
         self.menubar = None # insure no menubar initially
@@ -32,12 +38,12 @@ class switch(QWidget):
     app_bg = QSvgRenderer("imagesource/app_bg.svg")
 
     def paintEvent(self, event):
-        if self.stack.currentIndex() != 0 and self.stack.currentIndex() != 1: # prevent drawing other pages' bgs on welcome pg and access pg
+        if self.stack.currentIndex() not in [0,1]: # prevent drawing other pages' bgs on the pages don't need
             painter = QPainter(self)
             self.app_bg.render(painter, QRectF(self.rect()))
 
     def switch_p(self, index, mode=None):
-        if index != 0 and index != 1:
+        if index not in [0,1]:
             if not self.menubar:
                 self.menubar = seechem_menubar(self.switch_p)
                 self.layout.insertWidget(0, self.menubar)
