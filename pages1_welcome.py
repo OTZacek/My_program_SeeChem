@@ -39,24 +39,24 @@ class welcome(QWidget):
 
         wel_button1 = QPushButton("➔ Log in")
         wel_button1.setStyleSheet("""
-        font-size: 30px; text-align: left; color: white; 
-        border: none; background-color: transparent;
+        QPushButton {font-size: 30px; text-align: left; color: white; border: none; background-color: transparent;}
+        QPushButton:hover {background-color: #2D49A7; border-radius: 10px;}
         """)
         wel_button_widget.layout().addWidget(wel_button1)
         wel_button1.clicked.connect(lambda: switch_func(1, "log in"))
 
         wel_button2 = QPushButton("➔ Create account")
         wel_button2.setStyleSheet("""
-        font-size: 30px; text-align: left; color: white; 
-        border: none; background-color: transparent;
+        QPushButton {font-size: 30px; text-align: left; color: white; border: none; background-color: transparent;}
+        QPushButton:hover {background-color: #2D49A7; border-radius: 10px;}
         """)
         wel_button_widget.layout().addWidget(wel_button2)
         wel_button2.clicked.connect(lambda: switch_func(1, "create acc"))
 
         wel_button3 = QPushButton("➔ Continue as a guest")
         wel_button3.setStyleSheet("""
-        font-size: 30px; text-align: left; color: white; 
-        border: none; background-color: transparent;
+        QPushButton {font-size: 30px; text-align: left; color: white; border: none; background-color: transparent;}
+        QPushButton:hover {background-color: #2D49A7; border-radius: 10px;}
         """)
         wel_button_widget.layout().addWidget(wel_button3)
 

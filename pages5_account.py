@@ -1,8 +1,5 @@
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton
 from PyQt5.QtWidgets import QLineEdit, QMessageBox
-from PyQt5.QtGui import QPainter, QIcon
-from PyQt5.QtSvg import QSvgRenderer
-from PyQt5.QtSvg import QSvgWidget as qsvg
 from PyQt5.QtCore import Qt, QRectF
 
 class account(QWidget):
@@ -62,8 +59,20 @@ class account(QWidget):
 
         # button to save the changes
         aco_btn = QPushButton("Save")
-        aco_btn.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        aco_btn.setStyleSheet("font-size: 15px;")
+        # aco_btn.clicked.connect(self.update_userinfo())
         account_info_widget.layout().addWidget(aco_btn, alignment=Qt.AlignmentFlag.AlignRight)
+
+        # change userinfo function
+        # def update_userinfo():
+        #     new_username = self.aco_enter1.text().strip()
+        #     new_password = self.aco_enter2.text().strip()
+
+        #     if not new_username and not new_password:
+        #         QMessageBox.warning(self, "Error","One of the fields should be filled!")
+        #         return
+            
+
 
 
         # setting 
@@ -80,11 +89,11 @@ class account(QWidget):
         setting_widget.layout().addWidget(set_btn_widget, alignment=Qt.AlignmentFlag.AlignTop)
 
         set_btn1 = QPushButton("Erase all history")
-        set_btn1.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        set_btn1.setStyleSheet("font-size: 15px;")
         set_btn_widget.layout().addWidget(set_btn1, alignment=Qt.AlignmentFlag.AlignLeft)
 
         set_btn2 = QPushButton("Delete the account")
-        set_btn2.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        set_btn2.setStyleSheet("font-size: 15px;")
         set_btn_widget.layout().addWidget(set_btn2, alignment=Qt.AlignmentFlag.AlignLeft)
 
         

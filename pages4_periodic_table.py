@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QGridLayout
 from PyQt5.QtCore import Qt
 
-from seechem_funcs import box_shadow
+from seechem_gfuncs import box_shadow
 
 class periodic_table(QWidget):
     def __init__(self, switch_func):
@@ -35,6 +35,7 @@ class periodic_table(QWidget):
             (),
 
         ]
+        # haven't finished yet
 
         info_label = QLabel("Hover on an element to check the details of the element!")
         info_label.setStyleSheet("color:white;")

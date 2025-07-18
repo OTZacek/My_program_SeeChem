@@ -50,10 +50,10 @@ class seechem_menubar(QWidget):
 
         more_menu = QMenu()
         more_menu.addAction("Periodic Tabel", lambda: self.switch_func(3))
-        more_menu.addAction("Simulator")
-        more_menu.addAction("Chemistry Principles")
-        more_menu.addAction("If in Lab")
-        more_menu.addAction("Save 'n exit", lambda: sys.exit())
+        more_menu.addAction("Chemistry Principles", lambda: self.switch_func(5))
+        more_menu.addAction("If in Lab", lambda: self.switch_func(6))
+        more_menu.addAction("SeeChem Guide")
+        more_menu.addAction("Exit", lambda: sys.exit())
 
         more_menu.setStyleSheet("""
         QMenu {background-color: #12169B;}
