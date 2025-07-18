@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QStackedWidget, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QMenuBar, QToolBar, QApplication
-from PyQt5.QtWidgets import QDialog, QLineEdit, QMessageBox
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QLineEdit, QMessageBox
 from PyQt5.QtGui import QPainter, QIcon
 from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtSvg import QSvgWidget as qsvg
@@ -8,12 +8,22 @@ from PyQt5.QtCore import Qt, QRectF
 class account(QWidget):
     def __init__(self, switch_func):
         super().__init__()
-        self.setLayout(QVBoxLayout())
+        self.setLayout(QHBoxLayout())
+
+        # to make the widget can sit in the middle
+        empty1 = QWidget()
+        self.layout().addWidget(empty1, 2)
+        
+        self1 = QWidget()
+        self1.setLayout(QVBoxLayout())
+        self.layout().addWidget(self1, 5)
+
+        empty2 = QWidget()
+        self.layout().addWidget(empty2, 3)
 
         account_info_widget = QWidget()
         account_info_widget.setLayout(QVBoxLayout())
-        account_info_widget.setContentsMargins(100, 0, 100, 0)
-        self.layout().addWidget(account_info_widget, 5)
+        self1.layout().addWidget(account_info_widget, 4)
 
         aco_title = QLabel("Account Information")
         aco_title.setStyleSheet("color: white; font-size: 30px; font-weight: bold;")
@@ -50,22 +60,32 @@ class account(QWidget):
         self.aco_enter2 = QLineEdit()
         aco_widget4.layout().addWidget(self.aco_enter2, alignment=Qt.AlignmentFlag.AlignLeft)
 
-        aco_btn = QPushButton("Save")
-        aco_btn.setStyleSheet("font-size: 10px;")
-        account_info_widget.layout().addWidget(aco_btn, alignment=Qt.AlignmentFlag.AlignRight)
-
-
         # button to save the changes
+        aco_btn = QPushButton("Save")
+        aco_btn.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        account_info_widget.layout().addWidget(aco_btn, alignment=Qt.AlignmentFlag.AlignRight)
 
 
         # setting 
         setting_widget = QWidget()
         setting_widget.setLayout(QVBoxLayout())
-        self.layout().addWidget(setting_widget, 5)
+        self1.layout().addWidget(setting_widget, 6)
 
         set_title = QLabel("Setting")
         set_title.setStyleSheet("color: white; font-size: 30px; font-weight: bold;")
         setting_widget.layout().addWidget(set_title)
+
+        set_btn_widget = QWidget()
+        set_btn_widget.setLayout(QVBoxLayout())
+        setting_widget.layout().addWidget(set_btn_widget, alignment=Qt.AlignmentFlag.AlignTop)
+
+        set_btn1 = QPushButton("Erase all history")
+        set_btn1.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        set_btn_widget.layout().addWidget(set_btn1, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        set_btn2 = QPushButton("Delete the account")
+        set_btn2.setStyleSheet("font-size: 15px; border-radius: 5px;")
+        set_btn_widget.layout().addWidget(set_btn2, alignment=Qt.AlignmentFlag.AlignLeft)
 
         
 

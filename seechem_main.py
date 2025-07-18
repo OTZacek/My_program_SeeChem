@@ -4,6 +4,8 @@ from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtCore import QRectF
 from func_menubar import seechem_menubar
 
+from seechem_database import init_db1
+
 from pages1_welcome import welcome
 from pages2_access import access
 from pages3_home import home
@@ -61,6 +63,7 @@ class switch(QWidget):
         self.stack.setCurrentIndex(index)
 
 
+init_db1()   # initiate the database
 app = QApplication([])
 window = switch()
 appicon = QIcon("imagesource/SeeChem_icon.png") #set app icon

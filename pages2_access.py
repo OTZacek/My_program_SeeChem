@@ -4,6 +4,10 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtCore import Qt, QRectF
 
+from seechem_database import add_user_db1, check_user_db1
+
+
+
 class access(QWidget):
     def __init__(self, switch_func, mode="create acc"):
         super().__init__()
@@ -108,12 +112,14 @@ class access(QWidget):
             return
         
         try:
-            with open("accounts.txt", "a") as file:
-                file.write(f"{username},{password}\n")
-            QMessageBox.information(self, "Success", "Welcome to SeeChem!")
-            self.acc_enter1.clear()
-            self.acc_enter2.clear()
-            self.acc_enter3.clear()
+            success1 = add_user_db1(username, password)
+            if success1:
+                QMessageBox.information(self, "Success", "Welcome to SeeChem!")
+                self.acc_enter1.clear()
+                self.acc_enter2.clear()
+                self.acc_enter3.clear()
+            else:
+                QMessageBox.warning(self, "Error", "Username already exists!")
         except Exception as e:  # error seeking
             QMessageBox.critical(self, "Error", f"An error occurred while saving the account: {e}")
 
@@ -127,17 +133,11 @@ class access(QWidget):
             return
         
         try:
-            with open("accounts.txt", "r") as file:
-                accounts = file.readlines()
-                for account in accounts:
-                    stored_username, stored_password = account.strip().split(",")
-                    if username == stored_username and password == stored_password:
-                        QMessageBox.information(self, "Success", "Login successful!")
-                        self.switch_func(2)
-                        return
-
-            QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
-        except FileNotFoundError:
-            QMessageBox.critical(self, "Error", "Accounts file not found!")
+            success2 = check_user_db1(username, password)
+            if success2:
+                QMessageBox.information(self, "Success", "Login successful!")
+                self.switch_func(2)
+            else:
+                QMessageBox.warning(self, "Error", "Invalid username or password!")
         except Exception as e:  # error seeking
             QMessageBox.critical(self, "Error", f"An error occurred during login: {e}")
