@@ -36,4 +36,4 @@ def check_user_db1(username, password):
     cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
     result = cursor.fetchone()
     conn.close()
-    return result is not None
+    return result is not None   # return True or False to tell whether successful login or not
