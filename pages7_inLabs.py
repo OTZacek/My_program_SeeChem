@@ -13,7 +13,7 @@ class inLabs(QWidget):
         inb_content_widget = QWidget()
         inb_content_widget.setLayout(QVBoxLayout())
         inb_content_widget.setStyleSheet("background-color: transparent; border-radius: 10px;")
-        self.layout().addWidget(inb_content_widget, 4)
+        self.layout().addWidget(inb_content_widget, 5)
 
         self.text_browser = QTextBrowser()
         html_path = os.path.abspath(os.path.join("resources", "inLabs_regulations.html"))

@@ -64,16 +64,13 @@ class account(QWidget):
         account_info_widget.layout().addWidget(aco_btn, alignment=Qt.AlignmentFlag.AlignRight)
 
         # change userinfo function
-        # def update_userinfo():
-        #     new_username = self.aco_enter1.text().strip()
-        #     new_password = self.aco_enter2.text().strip()
+        def update_userinfo():
+            new_username = self.aco_enter1.text().strip()
+            new_password = self.aco_enter2.text().strip()
 
-        #     if not new_username and not new_password:
-        #         QMessageBox.warning(self, "Error","One of the fields should be filled!")
-        #         return
-            
-
-
+            if not new_username and not new_password:
+                QMessageBox.warning(self, "Error","One of the fields should be filled!")
+                return
 
         # setting 
         setting_widget = QWidget()
