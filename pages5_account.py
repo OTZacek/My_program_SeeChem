@@ -48,6 +48,8 @@ class account(QWidget):
         aco_widget3.layout().addWidget(aco_txt1_label)
 
         self.aco_enter1 = QLineEdit()
+        self.aco_enter1.setPlaceholderText("update your username here")
+        self.aco_enter1.setFixedWidth(200)
         aco_widget4.layout().addWidget(self.aco_enter1, alignment=Qt.AlignmentFlag.AlignLeft)
 
         aco_txt2_label = QLabel("Password:")
@@ -55,11 +57,15 @@ class account(QWidget):
         aco_widget3.layout().addWidget(aco_txt2_label)
 
         self.aco_enter2 = QLineEdit()
+        self.aco_enter2.setPlaceholderText("update your password here")
+        self.aco_enter2.setFixedWidth(200)
         aco_widget4.layout().addWidget(self.aco_enter2, alignment=Qt.AlignmentFlag.AlignLeft)
 
         # button to save the changes
         aco_btn = QPushButton("Save")
-        aco_btn.setStyleSheet("font-size: 15px;")
+        aco_btn.setStyleSheet("""
+        QPushButton {font-size: 15px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+        QPushButton:hover {background-color: #C4B9B9;}""")
         # aco_btn.clicked.connect(self.update_userinfo())
         account_info_widget.layout().addWidget(aco_btn, alignment=Qt.AlignmentFlag.AlignRight)
 
@@ -86,13 +92,13 @@ class account(QWidget):
         setting_widget.layout().addWidget(set_btn_widget, alignment=Qt.AlignmentFlag.AlignTop)
 
         set_btn1 = QPushButton("Erase all history")
-        set_btn1.setStyleSheet("font-size: 15px;")
+        set_btn1.setStyleSheet("""
+        QPushButton {font-size: 15px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+        QPushButton:hover {background-color: #C4B9B9;}""")
         set_btn_widget.layout().addWidget(set_btn1, alignment=Qt.AlignmentFlag.AlignLeft)
 
         set_btn2 = QPushButton("Delete the account")
-        set_btn2.setStyleSheet("font-size: 15px;")
+        set_btn2.setStyleSheet("""
+        QPushButton {font-size: 15px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+        QPushButton:hover {background-color: #C4B9B9;}""")
         set_btn_widget.layout().addWidget(set_btn2, alignment=Qt.AlignmentFlag.AlignLeft)
-
-        
-
-    

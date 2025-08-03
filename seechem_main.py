@@ -4,7 +4,7 @@ from PyQt5.QtSvg import QSvgRenderer
 from PyQt5.QtCore import QRectF
 from func_menubar import seechem_menubar
 
-from seechem_database import init_db1
+from seechem_database import init_db1, init_db2
 
 from pages1_welcome import welcome
 from pages2_access import access
@@ -69,7 +69,10 @@ class switch(QWidget):
         self.stack.setCurrentIndex(index)
 
 
-init_db1()   # initiate the database
+# initiate the databases
+init_db1()
+init_db2()
+
 app = QApplication([])
 window = switch()
 appicon = QIcon("imagesource/SeeChem_icon.png") #set app icon
