@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from seechem_wfuncs import calculate_ph, calculate_molar_mass
 
 
-class principles(QWidget):
+class calc_tools(QWidget):
     def __init__(self, switch_func):
         super().__init__()
         self.setLayout(QVBoxLayout())
@@ -83,6 +83,7 @@ class principles(QWidget):
         button_widget.layout().addWidget(calc_btn, alignment=Qt.AlignLeft)
         calc_btn.clicked.connect(lambda: calculate_ph(self.ph_edit, self.h_edit, self.oh_edit, self.result, self))
 
+        # show the calculation results
         result_widget = QWidget()
         result_widget.setLayout(QVBoxLayout())
         ph_widget.layout().addWidget(result_widget)
@@ -130,6 +131,7 @@ class principles(QWidget):
         molar_button_widget.layout().addWidget(molar_calc_btn, alignment=Qt.AlignLeft)
         molar_calc_btn.clicked.connect(lambda: calculate_molar_mass(self.formula_edit, self.molar_result, self))
 
+        # show the calculation results
         molar_result_widget = QWidget()
         molar_result_widget.setLayout(QVBoxLayout())
         molar_widget.layout().addWidget(molar_result_widget)

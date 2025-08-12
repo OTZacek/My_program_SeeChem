@@ -11,7 +11,7 @@ class home(QWidget):
         self.setLayout(QVBoxLayout())
 
         # text
-        hom_caption1 = QLabel("Set up the experiments…")
+        hom_caption1 = QLabel("Get starting...")
         hom_caption1.setStyleSheet("font-size: 50px; color: white;")
         self.layout().addWidget(hom_caption1, 2, alignment=Qt.AlignmentFlag.AlignHCenter)
 
@@ -29,15 +29,6 @@ class home(QWidget):
         hom_content_widget.layout().addWidget(hom_recent_widget, 5)
 
         # let's create
-        create_label = QLabel("Let's create!")
+        create_label = QLabel("Rencently Used")
         create_label.setStyleSheet("font-family: Galvji; font-size: 20px; color: white;")
         hom_simu_widget.layout().addWidget(create_label, alignment=Qt.AlignmentFlag.AlignTop)
-
-        # recently created
-        recent_label = QLabel("Recently Created")
-        recent_label.setStyleSheet("font-family: Galvji; font-size: 20px; color: white;")
-        hom_recent_widget.layout().addWidget(recent_label, alignment=Qt.AlignmentFlag.AlignTop)
-
-        back_button = QPushButton("Back to Welcome")
-        self.layout().addWidget(back_button)
-        back_button.clicked.connect(lambda: switch_func(0))
