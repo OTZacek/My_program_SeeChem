@@ -14,6 +14,11 @@ class calc_tools(QWidget):
         top_widget.setLayout(QHBoxLayout())
         self.layout().addWidget(top_widget, 5)
 
+        down_widget = QWidget()
+        down_widget.setLayout(QHBoxLayout())
+        self.layout().addWidget(down_widget, 5)
+
+        # top
         ph_widget = QWidget()
         ph_widget.setLayout(QVBoxLayout())
         top_widget.layout().addWidget(ph_widget, 5)
@@ -22,8 +27,14 @@ class calc_tools(QWidget):
         molar_widget.setLayout(QVBoxLayout())
         top_widget.layout().addWidget(molar_widget, 5)
 
+        # down
+        shape_widget = QWidget()
+        shape_widget.setLayout(QVBoxLayout())
+        down_widget.layout().addWidget(shape_widget, 5)
 
-        # PH CALC UI
+
+
+# PH CALC UI
         title_widget = QWidget()
         title_widget.setLayout(QVBoxLayout())
         ph_widget.layout().addWidget(title_widget)
@@ -97,7 +108,7 @@ class calc_tools(QWidget):
         self.layout().addWidget(bottom_widget, 5)
 
 
-        # MOLAR MASS UI
+# MOLAR MASS UI
         molar_title_widget = QWidget()
         molar_title_widget.setLayout(QVBoxLayout())
         molar_widget.layout().addWidget(molar_title_widget)
@@ -140,3 +151,49 @@ class calc_tools(QWidget):
         self.molar_result.setStyleSheet("color: white; font-size: 16px;")
         self.molar_result.setWordWrap(True)
         molar_result_widget.layout().addWidget(self.molar_result, alignment=Qt.AlignLeft)
+
+
+# # SHAPE FINDER UI
+#         shape_title_widget = QWidget()
+#         shape_title_widget.setLayout(QVBoxLayout())
+#         shape_widget.layout().addWidget(shape_title_widget)
+
+#         shape_title = QLabel("2. Shape Finder")
+#         shape_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+#         shape_title_widget.layout().addWidget(shape_title, alignment=Qt.AlignLeft)
+
+#         shape_formula_widget = QWidget()
+#         shape_formula_widget.setLayout(QHBoxLayout())
+#         shape_widget.layout().addWidget(shape_formula_widget)
+
+#         shape_formula_label = QLabel("Formula:")
+#         shape_formula_label.setStyleSheet("color: white; font-size: 16px;")
+#         shape_formula_widget.layout().addWidget(shape_formula_label)
+
+#         self.shape_formula_edit = QLineEdit()
+#         self.shape_formula_edit.setPlaceholderText("e.g. CH4")
+#         self.shape_formula_edit.setFixedWidth(200)
+#         shape_formula_widget.layout().addWidget(self.shape_formula_edit, alignment=Qt.AlignCenter)
+
+#         shape_button_widget = QWidget()
+#         shape_button_widget.setLayout(QVBoxLayout())
+#         shape_widget.layout().addWidget(shape_button_widget)
+
+#         shape_find_btn = QPushButton("Calculate")
+#         shape_find_btn.setStyleSheet("""
+#         QPushButton {font-size: 16px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+#         QPushButton:hover {background-color: #C4B9B9;}
+#         """)
+#         shape_button_widget.layout().addWidget(shape_find_btn, alignment=Qt.AlignLeft)
+#         shape_find_btn.clicked.connect(lambda: calculate_molar_mass(self.shape_formula_edit, self.shape_result, self))
+
+#         # show the calculation results
+#         shape_result_widget = QWidget()
+#         shape_result_widget.setLayout(QVBoxLayout())
+#         shape_widget.layout().addWidget(shape_result_widget)
+
+#         self.shape_result = QLabel("")
+#         self.shape_result.setStyleSheet("color: white; font-size: 16px;")
+#         self.shape_result.setWordWrap(True)
+#         shape_result_widget.layout().addWidget(self.shape_result, alignment=Qt.AlignLeft)
+        

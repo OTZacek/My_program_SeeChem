@@ -82,3 +82,7 @@ def calculate_molar_mass(formula_edit, result_label, parent_widget):
         result_label.setText(f"Molar Mass of {formula} = {total_mass:.3f} g/mol")
     except ValueError as e:
         QMessageBox.warning(parent_widget, "Error", str(e))
+
+# # shape finder
+# def find_shape():
+    

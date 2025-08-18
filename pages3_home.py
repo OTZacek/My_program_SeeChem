@@ -28,7 +28,7 @@ class home(QWidget):
         hom_recent_widget.setLayout(QVBoxLayout())
         hom_content_widget.layout().addWidget(hom_recent_widget, 5)
 
-        # let's create
-        create_label = QLabel("Rencently Used")
+        # place for users to put notes
+        create_label = QLabel("Make your notes...")
         create_label.setStyleSheet("font-family: Galvji; font-size: 20px; color: white;")
         hom_simu_widget.layout().addWidget(create_label, alignment=Qt.AlignmentFlag.AlignTop)
