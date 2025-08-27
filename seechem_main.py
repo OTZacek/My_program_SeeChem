@@ -14,6 +14,8 @@ from pages5_account import account
 from pages6_calculating_tools import calc_tools
 from pages7_inLabs import inLabs
 
+from pages93_home_notlogin import n_home
+
 # base, switch page and apply changes globally
 class switch(QWidget):
     def __init__(self):
@@ -30,6 +32,8 @@ class switch(QWidget):
         self.calc_tools = calc_tools(self.switch_p)
         self.inLabs = inLabs(self.switch_p)
 
+        self.n_home = n_home(self.switch_p)
+
         self.stack.addWidget(self.welcome)          # 0
         self.stack.addWidget(self.access)           # 1
         self.stack.addWidget(self.home)             # 2
@@ -37,6 +41,8 @@ class switch(QWidget):
         self.stack.addWidget(self.account)          # 4
         self.stack.addWidget(self.calc_tools)       # 5
         self.stack.addWidget(self.inLabs)           # 6
+
+        self.stack.addWidget(self.n_home)           # 7
 
         self.layout = QVBoxLayout(self)
         self.menubar = None # insure no menubar initially
@@ -51,7 +57,7 @@ class switch(QWidget):
             self.app_bg.render(painter, QRectF(self.rect()))
 
     def switch_p(self, index, mode=None):
-        if index not in [0,1]:
+        if index not in [0,1,7]:
             if not self.menubar:
                 self.menubar = seechem_menubar(self.switch_p)
                 self.layout.insertWidget(0, self.menubar)
