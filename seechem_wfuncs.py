@@ -3,6 +3,7 @@ import re
 import math
 
 from seechem_database import get_molar_mass_db2
+from seechem_database import get_valence_electrons, get_vsepr_shape
 
 # pH calc 1
 def ph_from_h(h_conc: float) -> float:
@@ -83,6 +84,90 @@ def calculate_molar_mass(formula_edit, result_label, parent_widget):
     except ValueError as e:
         QMessageBox.warning(parent_widget, "Error", str(e))
 
-# # shape finder
-# def find_shape():
-    
+# shape finder
+def find_shape(s_formula_edit, s_result_label, s_parent_widget):
+    formula = s_formula_edit.text().strip()
+    if not formula:
+        QMessageBox.warning(s_parent_widget, "Input error", "Please enter a molecular formula (e.g. CH4).")
+        return
+
+    pattern = r'([A-Z][a-z]?)(\d*)'
+    parts = re.findall(pattern, formula)
+    if not parts:
+        QMessageBox.warning(s_parent_widget, "Input error", "Invalid chemical formula.")
+        return
+
+    try:
+        # Count atoms
+        elements = {}
+        for element, count in parts:
+            n = int(count) if count else 1
+            elements[element] = elements.get(element, 0) + n
+
+        # Central atom = first non-H (simple assumption)
+        central_atom = None
+        for atom in elements:
+            if atom != "H":
+                central_atom = atom
+                break
+        if not central_atom:
+            raise ValueError("Could not determine central atom.")
+
+        # Get valence electrons
+        ve = get_valence_electrons(central_atom)
+        if ve is None:
+            raise ValueError(f"No valence electron data for {central_atom}.")
+
+        # Number of bonded atoms (everything except central atom)
+        bonds = sum(count for atom, count in elements.items() if atom != central_atom)
+
+        # Estimate lone pairs (very simplified, assumes octet rule)
+        electrons_used = bonds * 2
+        lone_pairs = max(0, (ve + 8 - electrons_used) // 2 - bonds)
+
+        # Lookup shape
+        shape = get_vsepr_shape(bonds, lone_pairs)
+        if shape is None:
+            shape = "Unknown Shape"
+
+        s_result_label.setText(f"Formula: {formula}\nShape: {shape}")
+
+    except ValueError as e:
+        QMessageBox.warning(s_parent_widget, "Error", str(e))
+
+#4
+def calculate_percent_composition(c_formula_edit, c_result_label, c_parent_widget):
+    formula = c_formula_edit.text().strip()
+    if not formula:
+        QMessageBox.warning(c_parent_widget, "Input error", "Please enter a chemical formula.")
+        return
+
+    # Parse formula
+    pattern = r'([A-Z][a-z]?)(\d*)'
+    parts = re.findall(pattern, formula)
+    if not parts:
+        QMessageBox.warning(c_parent_widget, "Input error", "Invalid chemical formula.")
+        return
+
+    try:
+        # Calculate total molar mass
+        total_mass = 0
+        element_masses = {}
+        for element, count in parts:
+            mass = get_molar_mass_db2(element)
+            if mass is None:
+                raise ValueError(f"Unknown element: {element}")
+            n = int(count) if count else 1
+            element_masses[element] = element_masses.get(element, 0) + mass * n
+            total_mass += mass * n
+
+        # Calculate percent composition
+        result_lines = [f"Formula: {formula}"]
+        for elem, mass in element_masses.items():
+            percent = mass / total_mass * 100
+            result_lines.append(f"{elem}: {percent:.2f}%")
+
+        c_result_label.setText("\n".join(result_lines))
+
+    except ValueError as e:
+        QMessageBox.warning(c_parent_widget, "Error", str(e))

@@ -1,199 +1,214 @@
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton
-from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWidgets import (
+    QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton,
+    QLineEdit, QFormLayout, QCheckBox
+)
 from PyQt5.QtCore import Qt
 
-from seechem_wfuncs import calculate_ph, calculate_molar_mass
+
+from seechem_wfuncs import calculate_ph, calculate_molar_mass, find_shape, calculate_percent_composition
 
 
 class calc_tools(QWidget):
     def __init__(self, switch_func):
         super().__init__()
-        self.setLayout(QVBoxLayout())
+        main_layout = QVBoxLayout()
+        self.setLayout(main_layout)
 
+        # top, pH & Molar
         top_widget = QWidget()
-        top_widget.setLayout(QHBoxLayout())
-        self.layout().addWidget(top_widget, 5)
+        top_layout = QHBoxLayout()
+        top_widget.setLayout(top_layout)
+        main_layout.addWidget(top_widget, stretch=2)
 
+        # down, shape
         down_widget = QWidget()
-        down_widget.setLayout(QHBoxLayout())
-        self.layout().addWidget(down_widget, 5)
+        down_layout = QHBoxLayout()
+        down_widget.setLayout(down_layout)
+        main_layout.addWidget(down_widget, stretch=2)
 
-        # top
+        # ===========================================
+        # 1. pH CALCULATOR
         ph_widget = QWidget()
-        ph_widget.setLayout(QVBoxLayout())
-        top_widget.layout().addWidget(ph_widget, 5)
+        ph_layout = QVBoxLayout()
+        ph_widget.setLayout(ph_layout)
+        top_layout.addWidget(ph_widget, stretch=1)
 
-        molar_widget = QWidget()
-        molar_widget.setLayout(QVBoxLayout())
-        top_widget.layout().addWidget(molar_widget, 5)
+        # Title
+        ph_title = QLabel("1. pH and Ion Calculator")
+        ph_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        ph_layout.addWidget(ph_title, alignment=Qt.AlignLeft)
 
-        # down
-        shape_widget = QWidget()
-        shape_widget.setLayout(QVBoxLayout())
-        down_widget.layout().addWidget(shape_widget, 5)
-
-
-
-# PH CALC UI
-        title_widget = QWidget()
-        title_widget.setLayout(QVBoxLayout())
-        ph_widget.layout().addWidget(title_widget)
-
-        title = QLabel("1. pH and Ion Calculator")
-        title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
-        title_widget.layout().addWidget(title, alignment=Qt.AlignLeft)
-
-        ph_input_widget = QWidget()
-        ph_input_widget.setLayout(QHBoxLayout())
-        ph_widget.layout().addWidget(ph_input_widget)
-
-        ph_label = QLabel("pH:")
-        ph_label.setStyleSheet("color: white; font-size: 16px;")
-        ph_input_widget.layout().addWidget(ph_label)
+        # Formula input using FormLayout
+        ph_form = QFormLayout()
+        ph_form.setLabelAlignment(Qt.AlignLeft)
+        ph_form.setFormAlignment(Qt.AlignLeft)
 
         self.ph_edit = QLineEdit()
-        self.ph_edit.setPlaceholderText("Enter pH (0-14)")
-        self.ph_edit.setFixedWidth(200)
-        ph_input_widget.layout().addWidget(self.ph_edit, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        h_input_widget = QWidget()
-        h_input_widget.setLayout(QHBoxLayout())
-        ph_widget.layout().addWidget(h_input_widget)
-
-        h_label = QLabel("[H⁺]:")
-        h_label.setStyleSheet("color: white; font-size: 16px;")
-        h_input_widget.layout().addWidget(h_label)
-
         self.h_edit = QLineEdit()
-        self.h_edit.setPlaceholderText("Enter [H⁺] (mol/L)")
-        self.h_edit.setFixedWidth(200)
-        h_input_widget.layout().addWidget(self.h_edit, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        oh_input_widget = QWidget()
-        oh_input_widget.setLayout(QHBoxLayout())
-        ph_widget.layout().addWidget(oh_input_widget)
-
-        oh_label = QLabel("[OH⁻]:")
-        oh_label.setStyleSheet("color: white; font-size: 16px;")
-        oh_input_widget.layout().addWidget(oh_label)
-
         self.oh_edit = QLineEdit()
+
+        self.ph_edit.setPlaceholderText("Enter pH (0-14)")
+        self.h_edit.setPlaceholderText("Enter [H⁺] (mol/L)")
         self.oh_edit.setPlaceholderText("Enter [OH⁻] (mol/L)")
+
+        self.ph_edit.setFixedWidth(200)
+        self.h_edit.setFixedWidth(200)
         self.oh_edit.setFixedWidth(200)
-        oh_input_widget.layout().addWidget(self.oh_edit, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        button_widget = QWidget()
-        button_widget.setLayout(QVBoxLayout())
-        ph_widget.layout().addWidget(button_widget)
+        ph_form.addRow("pH:", self.ph_edit)
+        ph_form.addRow("[H⁺]:", self.h_edit)
+        ph_form.addRow("[OH⁻]:", self.oh_edit)
+        ph_layout.addLayout(ph_form)
 
+        # Calculate button
         calc_btn = QPushButton("Calculate")
         calc_btn.setStyleSheet("""
-        QPushButton {font-size: 16px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+        QPushButton {font-size: 16px; color: black; background-color: white; 
+        border-radius: 5px; padding: 5px 10px;}
         QPushButton:hover {background-color: #C4B9B9;}
         """)
-        button_widget.layout().addWidget(calc_btn, alignment=Qt.AlignLeft)
+
+        # Connect button to function
         calc_btn.clicked.connect(lambda: calculate_ph(self.ph_edit, self.h_edit, self.oh_edit, self.result, self))
+        ph_layout.addWidget(calc_btn, alignment=Qt.AlignLeft)
 
-        # show the calculation results
-        result_widget = QWidget()
-        result_widget.setLayout(QVBoxLayout())
-        ph_widget.layout().addWidget(result_widget)
-
+        # Result label
         self.result = QLabel("")
         self.result.setStyleSheet("color: white; font-size: 16px;")
         self.result.setWordWrap(True)
-        result_widget.layout().addWidget(self.result, alignment=Qt.AlignLeft)
+        ph_layout.addWidget(self.result, alignment=Qt.AlignLeft)
 
-        bottom_widget = QWidget()
-        self.layout().addWidget(bottom_widget, 5)
+        # Checkbox
+        self.ph_save_cb = QCheckBox("Save result")
+        ph_layout.addWidget(self.ph_save_cb, alignment=Qt.AlignLeft)
 
-
-# MOLAR MASS UI
-        molar_title_widget = QWidget()
-        molar_title_widget.setLayout(QVBoxLayout())
-        molar_widget.layout().addWidget(molar_title_widget)
+        # ===========================================
+        # 2. MOLAR MASS CALCULATOR
+        molar_widget = QWidget()
+        molar_layout = QVBoxLayout()
+        molar_widget.setLayout(molar_layout)
+        top_layout.addWidget(molar_widget, stretch=1)
 
         molar_title = QLabel("2. Molar Mass Calculator")
         molar_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
-        molar_title_widget.layout().addWidget(molar_title, alignment=Qt.AlignLeft)
+        molar_layout.addWidget(molar_title, alignment=Qt.AlignLeft)
 
-        formula_widget = QWidget()
-        formula_widget.setLayout(QHBoxLayout())
-        molar_widget.layout().addWidget(formula_widget)
-
-        formula_label = QLabel("Formula:")
-        formula_label.setStyleSheet("color: white; font-size: 16px;")
-        formula_widget.layout().addWidget(formula_label)
+        molar_form = QFormLayout()
+        molar_form.setLabelAlignment(Qt.AlignLeft)
+        molar_form.setFormAlignment(Qt.AlignLeft)
 
         self.formula_edit = QLineEdit()
         self.formula_edit.setPlaceholderText("e.g. H2SO4")
         self.formula_edit.setFixedWidth(200)
-        formula_widget.layout().addWidget(self.formula_edit, alignment=Qt.AlignCenter)
-
-        molar_button_widget = QWidget()
-        molar_button_widget.setLayout(QVBoxLayout())
-        molar_widget.layout().addWidget(molar_button_widget)
+        molar_form.addRow("Formula:", self.formula_edit)
+        molar_layout.addLayout(molar_form)
 
         molar_calc_btn = QPushButton("Calculate")
         molar_calc_btn.setStyleSheet("""
-        QPushButton {font-size: 16px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
+        QPushButton {font-size: 16px; color: black; background-color: white; 
+        border-radius: 5px; padding: 5px 10px;}
         QPushButton:hover {background-color: #C4B9B9;}
         """)
-        molar_button_widget.layout().addWidget(molar_calc_btn, alignment=Qt.AlignLeft)
         molar_calc_btn.clicked.connect(lambda: calculate_molar_mass(self.formula_edit, self.molar_result, self))
-
-        # show the calculation results
-        molar_result_widget = QWidget()
-        molar_result_widget.setLayout(QVBoxLayout())
-        molar_widget.layout().addWidget(molar_result_widget)
+        molar_layout.addWidget(molar_calc_btn, alignment=Qt.AlignLeft)
 
         self.molar_result = QLabel("")
         self.molar_result.setStyleSheet("color: white; font-size: 16px;")
         self.molar_result.setWordWrap(True)
-        molar_result_widget.layout().addWidget(self.molar_result, alignment=Qt.AlignLeft)
+        molar_layout.addWidget(self.molar_result, alignment=Qt.AlignLeft)
+
+        # Checkbox
+        self.molar_save_cb = QCheckBox("Save result")
+        molar_layout.addWidget(self.molar_save_cb, alignment=Qt.AlignLeft)
+
+        # ===========================================
+        # 3. SHAPE FINDER
+        shape_widget = QWidget()
+        shape_layout = QVBoxLayout()
+        shape_widget.setLayout(shape_layout)
+        down_layout.addWidget(shape_widget, stretch=1)
+
+        shape_title = QLabel("3. Shape finder")
+        shape_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        shape_layout.addWidget(shape_title, alignment=Qt.AlignLeft)
+
+        shape_form_widget = QWidget()
+        shape_form_layout = QFormLayout()
+        shape_form_layout.setLabelAlignment(Qt.AlignLeft)
+        shape_form_layout.setFormAlignment(Qt.AlignLeft)
+        shape_form_widget.setLayout(shape_form_layout)
+
+        self.shape_formula_edit = QLineEdit()
+        self.shape_formula_edit.setPlaceholderText("e.g. CH4")
+        self.shape_formula_edit.setFixedWidth(200)
+        shape_form_layout.addRow("Formula:", self.shape_formula_edit)
+        shape_layout.addWidget(shape_form_widget)
+
+        shape_find_btn = QPushButton("Calculate")
+        shape_find_btn.setStyleSheet("""
+        QPushButton {font-size: 16px; color: black; background-color: white; 
+        border-radius: 5px; padding: 5px 10px;}
+        QPushButton:hover {background-color: #C4B9B9;}
+        """)
+        shape_find_btn.clicked.connect(lambda: find_shape(self.shape_formula_edit, self.shape_result, self))
+        shape_layout.addWidget(shape_find_btn, alignment=Qt.AlignLeft)
+
+        self.shape_result = QLabel("")
+        self.shape_result.setStyleSheet("color: white; font-size: 16px;")
+        self.shape_result.setWordWrap(True)
+        shape_layout.addWidget(self.shape_result, alignment=Qt.AlignLeft)
 
 
-# # SHAPE FINDER UI
-#         shape_title_widget = QWidget()
-#         shape_title_widget.setLayout(QVBoxLayout())
-#         shape_widget.layout().addWidget(shape_title_widget)
+        # Checkbox
+        self.shape_save_cb = QCheckBox("Save result")
+        shape_layout.addWidget(self.shape_save_cb, alignment=Qt.AlignLeft)
 
-#         shape_title = QLabel("2. Shape Finder")
-#         shape_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
-#         shape_title_widget.layout().addWidget(shape_title, alignment=Qt.AlignLeft)
+        # ===========================================
+        # 4. Percent Composition Calculator
+        percent_widget = QWidget()
+        percent_layout = QVBoxLayout()
+        percent_widget.setLayout(percent_layout)
+        down_layout.addWidget(percent_widget, stretch=1)
 
-#         shape_formula_widget = QWidget()
-#         shape_formula_widget.setLayout(QHBoxLayout())
-#         shape_widget.layout().addWidget(shape_formula_widget)
+        percent_title = QLabel("4. Percent Composition Calculator")
+        percent_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        percent_layout.addWidget(percent_title, alignment=Qt.AlignLeft)
 
-#         shape_formula_label = QLabel("Formula:")
-#         shape_formula_label.setStyleSheet("color: white; font-size: 16px;")
-#         shape_formula_widget.layout().addWidget(shape_formula_label)
+        percent_form = QFormLayout()
+        percent_form.setLabelAlignment(Qt.AlignLeft)
+        percent_form.setFormAlignment(Qt.AlignLeft)
 
-#         self.shape_formula_edit = QLineEdit()
-#         self.shape_formula_edit.setPlaceholderText("e.g. CH4")
-#         self.shape_formula_edit.setFixedWidth(200)
-#         shape_formula_widget.layout().addWidget(self.shape_formula_edit, alignment=Qt.AlignCenter)
+        percent_formula_edit = QLineEdit()
+        percent_formula_edit.setPlaceholderText("e.g. C6H12O6")
+        percent_formula_edit.setFixedWidth(200)
+        percent_form.addRow("Formula:", percent_formula_edit)
+        percent_layout.addLayout(percent_form)
 
-#         shape_button_widget = QWidget()
-#         shape_button_widget.setLayout(QVBoxLayout())
-#         shape_widget.layout().addWidget(shape_button_widget)
+        percent_calc_btn = QPushButton("Calculate")
+        percent_calc_btn.setStyleSheet("""
+        QPushButton {font-size: 16px; color: black; background-color: white; 
+        border-radius: 5px; padding: 5px 10px;}
+        QPushButton:hover {background-color: #C4B9B9;}
+        """)
+        percent_layout.addWidget(percent_calc_btn, alignment=Qt.AlignLeft)
 
-#         shape_find_btn = QPushButton("Calculate")
-#         shape_find_btn.setStyleSheet("""
-#         QPushButton {font-size: 16px; color: black; background-color: white; border-radius: 5px; padding: 5px 10px;}
-#         QPushButton:hover {background-color: #C4B9B9;}
-#         """)
-#         shape_button_widget.layout().addWidget(shape_find_btn, alignment=Qt.AlignLeft)
-#         shape_find_btn.clicked.connect(lambda: calculate_molar_mass(self.shape_formula_edit, self.shape_result, self))
+        percent_result = QLabel("")
+        percent_result.setStyleSheet("color: white; font-size: 16px;")
+        percent_result.setWordWrap(True)
+        percent_layout.addWidget(percent_result, alignment=Qt.AlignLeft)
 
-#         # show the calculation results
-#         shape_result_widget = QWidget()
-#         shape_result_widget.setLayout(QVBoxLayout())
-#         shape_widget.layout().addWidget(shape_result_widget)
+        percent_calc_btn.clicked.connect(lambda: calculate_percent_composition(percent_formula_edit, percent_result, percent_widget))
 
-#         self.shape_result = QLabel("")
-#         self.shape_result.setStyleSheet("color: white; font-size: 16px;")
-#         self.shape_result.setWordWrap(True)
-#         shape_result_widget.layout().addWidget(self.shape_result, alignment=Qt.AlignLeft)
-        
+        # Checkbox
+        self.percent_save_cb = QCheckBox("Save result")
+        percent_layout.addWidget(self.percent_save_cb, alignment=Qt.AlignLeft)
+
+        # =====================================
+        # global save button
+        save_button = QPushButton("Store Selected Results")
+        save_button.setStyleSheet("""
+            QPushButton {font-size: 16px; color: black; background-color: white; margin: 0px 30px 30px 0px;
+            border-radius: 5px; padding: 5px 10px;}
+            QPushButton:hover {background-color: #C4B9B9;}
+        """)
+        main_layout.addWidget(save_button, alignment=Qt.AlignRight)

@@ -83,3 +83,33 @@ def get_molar_mass_db2(symbol):
     if row:
         return row[0]
     return None
+
+valence_electrons_db = {
+    "H": 1, "He": 2,
+    "Li": 1, "Be": 2, "B": 3, "C": 4, "N": 5, "O": 6, "F": 7, "Ne": 8,
+    "P": 5, "S": 6, "Cl": 7, "Br": 7, "I": 7
+}
+
+vsepr_shapes_db = {
+    (2, 0): "Linear",
+    (3, 0): "Trigonal Planar",
+    (2, 1): "Bent",
+    (4, 0): "Tetrahedral",
+    (3, 1): "Trigonal Pyramidal",
+    (2, 2): "Bent",
+    (5, 0): "Trigonal Bipyramidal",
+    (4, 1): "See-Saw",
+    (3, 2): "T-Shaped",
+    (2, 3): "Linear",
+    (6, 0): "Octahedral",
+    (5, 1): "Square Pyramidal",
+    (4, 2): "Square Planar"
+}
+
+
+def get_valence_electrons(element: str):
+    return valence_electrons_db.get(element)
+
+
+def get_vsepr_shape(bonds: int, lone_pairs: int):
+    return vsepr_shapes_db.get((bonds, lone_pairs))

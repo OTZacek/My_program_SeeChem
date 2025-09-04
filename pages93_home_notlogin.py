@@ -17,7 +17,7 @@ class n_home(QWidget):
 
         # buttons
         btn_widget = QWidget()
-        btn_widget.setLayout()
+        # btn_widget.setLayout()
         self.layout().addWidget(btn_widget)
 
         
