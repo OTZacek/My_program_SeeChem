@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 
 
 # Database 1, for storing users' private information
@@ -8,6 +9,8 @@ db1_seechem = "userinfo.db"
 def init_db1():
     conn = sqlite3.connect(db1_seechem)
     cursor = conn.cursor()
+
+# users tables
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,32 +18,38 @@ def init_db1():
             password TEXT NOT NULL
         )
     ''')
+
+# notes tables
     conn.commit()
     conn.close()
 
+# Users
 def add_user_db1(username, password):
     try:
         conn = sqlite3.connect(db1_seechem)
         cursor = conn.cursor()
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
         conn.commit()
-        return True
+        user_id = cursor.lastrowid  # get user_id
+        return True, user_id
     except sqlite3.IntegrityError:  # ensure code functions even if illegal characters or words be put in
-        return False
+        return False, None
     finally:
         conn.close()
 
 def check_user_db1(username, password):
     conn = sqlite3.connect(db1_seechem)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+    cursor.execute("SELECT id FROM users WHERE username=? AND password=?", (username, password))
     result = cursor.fetchone()
     conn.close()
-    return result is not None   # return True or False to tell whether successful login or not
+    return result[0] if result else None   # return True or False to tell whether successful login or not, and linked to database
 
 def delete_user_db1(username, password):
     conn = sqlite3.connect(db1_seechem)
     cursor = conn.cursor()
+
+# Notes
 
 # Database 2, stores some common chemical elements' molar masses
 db2_elements = "elements.db"

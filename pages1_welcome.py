@@ -53,15 +53,6 @@ class welcome(QWidget):
         wel_button_widget.layout().addWidget(wel_button2)
         wel_button2.clicked.connect(lambda: switch_func(1, "create acc"))
 
-        wel_button3 = QPushButton("➔ Continue as a guest")
-        wel_button3.setStyleSheet("""
-        QPushButton {font-size: 30px; text-align: left; color: white; border: none; background-color: transparent;}
-        QPushButton:hover {background-color: #2D49A7; border-radius: 10px;}
-        """)
-        wel_button_widget.layout().addWidget(wel_button3)
-        wel_button3.clicked.connect(lambda: switch_func(7))
-
-
         fastbutton = QPushButton("HOME")
         wel_button_widget.layout().addWidget(fastbutton)
         fastbutton.clicked.connect(lambda: switch_func(2))

@@ -35,7 +35,7 @@ class calc_tools(QWidget):
 
         # Title
         ph_title = QLabel("1. pH and Ion Calculator")
-        ph_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        ph_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         ph_layout.addWidget(ph_title, alignment=Qt.AlignLeft)
 
         # Formula input using FormLayout
@@ -90,7 +90,7 @@ class calc_tools(QWidget):
         top_layout.addWidget(molar_widget, stretch=1)
 
         molar_title = QLabel("2. Molar Mass Calculator")
-        molar_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        molar_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         molar_layout.addWidget(molar_title, alignment=Qt.AlignLeft)
 
         molar_form = QFormLayout()
@@ -129,7 +129,7 @@ class calc_tools(QWidget):
         down_layout.addWidget(shape_widget, stretch=1)
 
         shape_title = QLabel("3. Shape finder")
-        shape_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        shape_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         shape_layout.addWidget(shape_title, alignment=Qt.AlignLeft)
 
         shape_form_widget = QWidget()
@@ -171,7 +171,7 @@ class calc_tools(QWidget):
         down_layout.addWidget(percent_widget, stretch=1)
 
         percent_title = QLabel("4. Percent Composition Calculator")
-        percent_title.setStyleSheet("font-size: 26px; font-weight: bold; color: white;")
+        percent_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         percent_layout.addWidget(percent_title, alignment=Qt.AlignLeft)
 
         percent_form = QFormLayout()
