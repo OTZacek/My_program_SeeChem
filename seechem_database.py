@@ -1,38 +1,47 @@
 import sqlite3
-import datetime
 
-
-# Database 1, for storing users' private information
+# Database for storing users' private information
 db1_seechem = "userinfo.db"
 
-# UNIQUE ensures no repeated usernames in the database
+current_logged_in_username = None
+
+def set_current_user(username):
+    global current_logged_in_username
+    current_logged_in_username = username
+
+def get_current_user():
+    global current_logged_in_username
+    return current_logged_in_username
+
 def init_db1():
     conn = sqlite3.connect(db1_seechem)
     cursor = conn.cursor()
 
-# users tables
+    # users table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
+            password TEXT NOT NULL,
+            notes TEXT DEFAULT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
 
-# notes tables
     conn.commit()
     conn.close()
 
-# Users
+# User management functions
 def add_user_db1(username, password):
     try:
         conn = sqlite3.connect(db1_seechem)
         cursor = conn.cursor()
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
         conn.commit()
-        user_id = cursor.lastrowid  # get user_id
+        user_id = cursor.lastrowid
         return True, user_id
-    except sqlite3.IntegrityError:  # ensure code functions even if illegal characters or words be put in
+    except sqlite3.IntegrityError:
         return False, None
     finally:
         conn.close()
@@ -43,13 +52,110 @@ def check_user_db1(username, password):
     cursor.execute("SELECT id FROM users WHERE username=? AND password=?", (username, password))
     result = cursor.fetchone()
     conn.close()
-    return result[0] if result else None   # return True or False to tell whether successful login or not, and linked to database
+    return result[0] if result else None
 
-def delete_user_db1(username, password):
+def update_username(old_username, new_username):
     conn = sqlite3.connect(db1_seechem)
     cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE users SET username=? WHERE username=?", (new_username, old_username))
+        conn.commit()
+        updated = cursor.rowcount
+        conn.close()
+        return updated > 0
+    except sqlite3.IntegrityError:
+        conn.close()
+        return False
 
-# Notes
+def update_password(username, new_password):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    cursor.execute("UPDATE users SET password=? WHERE username=?", (new_password, username))
+    conn.commit()
+    conn.close()
+    return True
+
+def delete_notes(username):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    cursor.execute("UPDATE users SET notes=NULL WHERE username=?", (username,))
+    conn.commit()
+    conn.close()
+    return True
+
+def delete_user_db1(username):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    cursor.execute("DELETE FROM users WHERE username=?", (username,))
+    conn.commit()
+    conn.close()
+    return True
+
+def view_notes(username, password):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT notes FROM users WHERE username=? AND password=?", (username, password))
+    result = cursor.fetchone()
+    
+    conn.close()
+    return result[0] if result and result[0] is not None else "No notes found."
+
+def delete_notes(username, password):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    # Verify user credentials first
+    cursor.execute("SELECT id FROM users WHERE username=? AND password=?", (username, password))
+    user = cursor.fetchone()
+    
+    if user:
+        cursor.execute("UPDATE users SET notes=NULL, updated_at=CURRENT_TIMESTAMP WHERE username=?", (username,))
+        conn.commit()
+        conn.close()
+        return True
+    else:
+        conn.close()
+        return False
+
+def clear_all_notes(username, password):
+    return delete_notes(username, password)
+
+def get_user_stats(username, password):
+    conn = sqlite3.connect(db1_seechem)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT username, LENGTH(notes) as notes_length, 
+               created_at, updated_at 
+        FROM users WHERE username=? AND password=?
+    ''', (username, password))
+    
+    result = cursor.fetchone()
+    conn.close()
+    
+    if result:
+        return {
+            'username': result[0],
+            'notes_length': result[1] if result[1] else 0,
+            'created_at': result[2],
+            'last_updated': result[3]
+        }
+    else:
+        return None
+
+
+
+
+
+
+
+
+
+
 
 # Database 2, stores some common chemical elements' molar masses
 db2_elements = "elements.db"

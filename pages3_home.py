@@ -43,12 +43,12 @@ class home(QWidget):
         hom_content_widget.layout().addWidget(btn_row, 1)
 
         save_button = QPushButton("Save")
-        save_button.setStyleSheet("font-size: 16px; padding: 6px;")
+        save_button.setStyleSheet("font-size: 16px; padding: 6px; background-color: white; border-radius: 5px; color: black;")
         save_button.clicked.connect(self.save_note)
         btn_row.layout().addWidget(save_button)
 
         history_button = QPushButton("History")
-        history_button.setStyleSheet("font-size: 16px; padding: 6px;")
+        history_button.setStyleSheet("font-size: 16px; padding: 6px; background-color: white; border-radius: 5px; color: black;")
         history_button.clicked.connect(self.show_history)
         btn_row.layout().addWidget(history_button)
 
