@@ -140,6 +140,24 @@ class account(QWidget):
             QMessageBox.warning(self, "Error", "Please enter a new username and/or password!")
             return
 
+        # Boundary checks for new username
+        if new_username:
+            if len(new_username) > 10:
+                QMessageBox.warning(self, "Error", "New username cannot be more than 10 characters!")
+                return
+            if " " in new_username:
+                QMessageBox.warning(self, "Error", "New username cannot contain spaces!")
+                return
+
+        # Boundary checks for new password
+        if new_password:
+            if len(new_password) > 10:
+                QMessageBox.warning(self, "Error", "New password cannot be more than 10 characters!")
+                return
+            if " " in new_password:
+                QMessageBox.warning(self, "Error", "New password cannot contain spaces!")
+                return
+
         try:
             verification = check_user_db1(current_username, current_password)
             if verification:  # user exists
@@ -161,6 +179,7 @@ class account(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred: {e}")
+
     
     # delete userinfo function
     def delete_userinfo(self):

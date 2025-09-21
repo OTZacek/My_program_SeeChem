@@ -103,10 +103,26 @@ class access(QWidget):
         password = self.acc_enter2.text().strip()
         confirm_password = self.acc_enter3.text().strip()
 
+        # Check empty fields
         if not username or not password or not confirm_password:
             QMessageBox.warning(self, "Input Error", "All fields are required!")
             return
         
+        # Check boundary rules
+        if len(username) > 10:
+            QMessageBox.warning(self, "Input Error", "Username cannot be more than 10 characters!")
+            return
+        if " " in username:
+            QMessageBox.warning(self, "Input Error", "Username cannot contain spaces!")
+            return
+        if len(password) > 10:
+            QMessageBox.warning(self, "Input Error", "Password cannot be more than 10 characters!")
+            return
+        if " " in password:
+            QMessageBox.warning(self, "Input Error", "Password cannot contain spaces!")
+            return
+
+        # Confirm password check
         if password != confirm_password:
             QMessageBox.warning(self, "Password Error", "Passwords do not match!")
             return
@@ -120,8 +136,9 @@ class access(QWidget):
                 self.acc_enter3.clear()
             else:
                 QMessageBox.warning(self, "Error", "Username already exists!")
-        except Exception as e:  # error seeking
+        except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred while saving the account: {e}")
+
 
         # log in function
     def login(self):
