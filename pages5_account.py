@@ -26,7 +26,7 @@ class account(QWidget):
         aco_title.setAlignment(Qt.AlignLeft)
         account_info_widget.layout().addWidget(aco_title)
 
-        # --- Verification Section ---
+        # Verification Section
         verify_label = QLabel("Verify your account")
         verify_label.setStyleSheet("color: white; font-size: 15px; font-weight: bold;")
         account_info_widget.layout().addWidget(verify_label)
@@ -56,7 +56,7 @@ class account(QWidget):
         verify_row.layout().addWidget(self.aco_enter2)
 
 
-        # --- Update Section ---
+        # Update Section
         update_label = QLabel("Update account information")
         update_label.setStyleSheet("color: white; font-size: 15px; font-weight: bold;")
         account_info_widget.layout().addWidget(update_label)

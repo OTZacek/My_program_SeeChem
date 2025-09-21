@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QLineEdit, QFormLayout
 from PyQt5.QtCore import Qt
 
-
 from seechem_wfuncs import calculate_ph, calculate_molar_mass, find_shape, calculate_percent_composition
+from seechem_gfuncs import box_shadow
 
 
 class calc_tools(QWidget):
@@ -33,6 +33,7 @@ class calc_tools(QWidget):
         ph_title = QLabel("1. pH and Ion Calculator")
         ph_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         ph_layout.addWidget(ph_title, alignment=Qt.AlignLeft)
+        box_shadow(ph_title)
 
         # Formula input using FormLayout
         ph_form = QFormLayout()
@@ -83,6 +84,7 @@ class calc_tools(QWidget):
         molar_title = QLabel("2. Molar Mass Calculator")
         molar_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         molar_layout.addWidget(molar_title, alignment=Qt.AlignLeft)
+        box_shadow(molar_title)
 
         molar_form = QFormLayout()
         molar_form.setLabelAlignment(Qt.AlignLeft)
@@ -117,6 +119,7 @@ class calc_tools(QWidget):
         shape_title = QLabel("3. Shape finder")
         shape_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         shape_layout.addWidget(shape_title, alignment=Qt.AlignLeft)
+        box_shadow(shape_title)
 
         shape_form_widget = QWidget()
         shape_form_layout = QFormLayout()
@@ -153,6 +156,7 @@ class calc_tools(QWidget):
         percent_title = QLabel("4. Percent Composition Calculator")
         percent_title.setStyleSheet("font-size: 20px; font-weight: bold; color: white;")
         percent_layout.addWidget(percent_title, alignment=Qt.AlignLeft)
+        box_shadow(percent_title)
 
         percent_form = QFormLayout()
         percent_form.setLabelAlignment(Qt.AlignLeft)

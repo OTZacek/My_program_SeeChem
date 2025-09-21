@@ -22,28 +22,9 @@ def init_db1():
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
+            password TEXT NOT NULL)
     ''')
     conn.commit()
-
-    # Add notes column if missing
-    try:
-        cursor.execute("ALTER TABLE users ADD COLUMN notes TEXT DEFAULT NULL")
-        conn.commit()
-    except sqlite3.OperationalError:
-        # column already exists, do nothing
-        pass
-
-    # Add updated_at column if missing
-    try:
-        cursor.execute("ALTER TABLE users ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-        conn.commit()
-    except sqlite3.OperationalError:
-        # column already exists, do nothing
-        pass
-
     conn.close()
 
 

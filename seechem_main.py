@@ -39,7 +39,7 @@ class switch(QWidget):
         self.stack.addWidget(self.n_home)           # 6
 
         self.layout = QVBoxLayout(self)
-        self.menubar = None # insure no menubar initially
+        self.menubar = None # ensure no menubar initially
         self.layout.addWidget(self.stack)
         self.layout.setContentsMargins(0,0,0,0) # to ensure the bg can perfectly fit the windows
 
@@ -51,7 +51,7 @@ class switch(QWidget):
             self.app_bg.render(painter, QRectF(self.rect()))
 
     def switch_p(self, index, mode=None):
-        if index not in [0,1]:
+        if index not in [0,1,6]:
             if not self.menubar:
                 self.menubar = seechem_menubar(self.switch_p)
                 self.layout.insertWidget(0, self.menubar)
