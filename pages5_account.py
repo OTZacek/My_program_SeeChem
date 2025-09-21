@@ -8,6 +8,9 @@ from seechem_gfuncs import box_shadow
 class account(QWidget):
     def __init__(self, switch_func):
         super().__init__()
+
+        self.switch_func = switch_func
+        
         self.setLayout(QHBoxLayout())
 
         # to make the widget sit in the middle
@@ -209,6 +212,7 @@ class account(QWidget):
                 self.aco_enter2.clear()
                 self.aco_enter3.clear()
                 self.aco_enter4.clear()
+                self.switch_func(0)
             else:
                 QMessageBox.warning(self, "Error", "Username and password do not match!")
 

@@ -19,6 +19,8 @@ def ph_from_oh(oh_conc: float) -> float:
 
 def concentrations_from_ph(ph: float) -> tuple[float, float]:
     # Return H+ and OH- concentrations for a given pH
+    if not (0 <= ph <= 14):
+        raise ValueError("pH must be between 0 and 14")
     h_conc = 10 ** (-ph)
     oh_conc = 10 ** (-(14 - ph))
     return h_conc, oh_conc
@@ -40,20 +42,33 @@ def calculate_ph(ph_edit, h_edit, oh_edit, result_label, parent_widget):
     try:
         if ph_text:
             ph = float(ph_text)
+            if not (0 <= ph <= 14):
+                QMessageBox.warning(parent_widget, "Invalid input", "pH must be between 0 and 14.")
+                return
             h, oh = concentrations_from_ph(ph)
             result_label.setText(f"pH = {ph:.2f}\n[H⁺] = {h:.4e} mol/L\n[OH⁻] = {oh:.4e} mol/L")
+
         elif h_text:
             h = float(h_text)
             ph = ph_from_h(h)
+            if not (0 <= ph <= 14):
+                QMessageBox.warning(parent_widget, "Invalid input", "Calculated pH is outside 0~14.")
+                return
             oh = 10 ** (-(14 - ph))
             result_label.setText(f"[H⁺] = {h:.4e} mol/L\npH = {ph:.2f}\n[OH⁻] = {oh:.4e} mol/L")
+
         else:
             oh = float(oh_text)
             ph = ph_from_oh(oh)
+            if not (0 <= ph <= 14):
+                QMessageBox.warning(parent_widget, "Invalid input", "Calculated pH is outside 0~14.")
+                return
             h = 10 ** (-ph)
             result_label.setText(f"[OH⁻] = {oh:.4e} mol/L\npH = {ph:.2f}\n[H⁺] = {h:.4e} mol/L")
+
     except ValueError:
         QMessageBox.warning(parent_widget, "Invalid input", "Please enter valid numbers.")
+
 
 def calculate_molar_mass(formula_edit, result_label, parent_widget):
     # Compute total molar mass for a chemical formula
