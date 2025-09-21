@@ -1,9 +1,7 @@
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QGridLayout
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import Qt, QUrl
 import os
-
-from seechem_gfuncs import box_shadow
 
 class periodic_table(QWidget):
     def __init__(self, switch_func):

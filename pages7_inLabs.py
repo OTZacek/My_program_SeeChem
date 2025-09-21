@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QGridLayout, QWidget, QLabel, QTextBrowser
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QTextBrowser
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import Qt, QUrl
 import os

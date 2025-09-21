@@ -8,10 +8,9 @@ from seechem_database import init_db1, init_db2
 
 from pages1_welcome import welcome
 from pages2_access import access
-from pages3_home import home
+from pages3_home import calc_tools
 from pages4_periodic_table import periodic_table
 from pages5_account import account
-from pages6_calculating_tools import calc_tools
 from pages7_inLabs import inLabs
 from pages93_home_notlogin import n_home
 
@@ -25,10 +24,9 @@ class switch(QWidget):
 
         self.welcome = welcome(self.switch_p)
         self.access = access(self.switch_p)
-        self.home = home(self.switch_p)
+        self.home = calc_tools(self.switch_p)
         self.periodic_table = periodic_table(self.switch_p)
         self.account = account(self.switch_p)
-        self.calc_tools = calc_tools(self.switch_p)
         self.inLabs = inLabs(self.switch_p)
         self.n_home = n_home(self.switch_p)
 
@@ -37,9 +35,8 @@ class switch(QWidget):
         self.stack.addWidget(self.home)             # 2
         self.stack.addWidget(self.periodic_table)   # 3
         self.stack.addWidget(self.account)          # 4
-        self.stack.addWidget(self.calc_tools)       # 5
-        self.stack.addWidget(self.inLabs)           # 6
-        self.stack.addWidget(self.n_home)           # 7
+        self.stack.addWidget(self.inLabs)           # 5
+        self.stack.addWidget(self.n_home)           # 6
 
         self.layout = QVBoxLayout(self)
         self.menubar = None # insure no menubar initially

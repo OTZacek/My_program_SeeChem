@@ -59,11 +59,7 @@ class welcome(QWidget):
         QPushButton:hover {background-color: #2D49A7; border-radius: 10px;}
         """)
         wel_button_widget.layout().addWidget(wel_button3)
-        wel_button3.clicked.connect(lambda: switch_func(7))
-
-        # fastbutton = QPushButton("HOME")
-        # wel_button_widget.layout().addWidget(fastbutton)
-        # fastbutton.clicked.connect(lambda: switch_func(2))
+        wel_button3.clicked.connect(lambda: switch_func(6))
 
         #logo
         wel_logo_widget = QWidget()

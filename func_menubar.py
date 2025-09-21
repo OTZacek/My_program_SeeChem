@@ -50,7 +50,6 @@ class seechem_menubar(QWidget):
 
         more_menu = QMenu()
         more_menu.addAction("Periodic Tabel", lambda: self.switch_func(3))
-        more_menu.addAction("Calculating Tools", lambda: self.switch_func(5))
         more_menu.addAction("If in Lab", lambda: self.switch_func(6))
         more_menu.addAction("Exit", lambda: sys.exit())
 
