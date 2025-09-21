@@ -75,7 +75,7 @@ init_db2()
 
 app = QApplication([])
 window = switch()
-appicon = QIcon("imagesource/SeeChem_icon.png") #set app icon
+appicon = QIcon("imagesource/SeeChem_icon.icns") #set app icon
 app.setWindowIcon(appicon)
 window.setMinimumSize(1000, 700)
 window.show()

@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QLineEdit, QMessageBox
 from PyQt5.QtCore import Qt
 
 from seechem_database import check_user_db1, update_username, update_password, delete_user_db1
+from seechem_gfuncs import box_shadow
 
 class account(QWidget):
     def __init__(self, switch_func):
@@ -22,6 +23,7 @@ class account(QWidget):
 
         # Title
         aco_title = QLabel("Account Management")
+        box_shadow(aco_title)
         aco_title.setStyleSheet("color: white; font-size: 30px; font-weight: bold;")
         aco_title.setAlignment(Qt.AlignLeft)
         account_info_widget.layout().addWidget(aco_title)
@@ -102,6 +104,7 @@ class account(QWidget):
         account_info_widget.layout().addWidget(setting_widget, 6)
 
         set_title = QLabel("Setting")
+        box_shadow(set_title)
         set_title.setStyleSheet("color: white; font-size: 30px; font-weight: bold;")
         setting_widget.layout().addWidget(set_title)
 
