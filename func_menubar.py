@@ -17,10 +17,6 @@ class seechem_menubar(QWidget):
             QPushButton {background: transparent; border: none; padding: 10px 20px;}
             QPushButton:hover {background-color: #7C6FC1; border-radius: 5px;}
             """)
-        
-        # an unknown glitch about the syntax highlighting on QLabel and QPushButton, that if I delete the QWidget, the /
-        # code runs well, yet the color of mentioned sentences will be strange /
-        # so I keep the QWidget...
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
